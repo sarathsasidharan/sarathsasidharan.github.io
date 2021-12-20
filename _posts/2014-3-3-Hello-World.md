@@ -6,5 +6,5 @@ published: true
 
 # Azure Synapse Analytics Adopter 
 
-##First Blog
+## First Blog
 
