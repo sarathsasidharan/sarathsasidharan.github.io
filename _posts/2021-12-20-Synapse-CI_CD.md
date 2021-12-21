@@ -15,9 +15,11 @@ In this post we will cover an end to end synapse CI / CD implemenation for Data 
 
 Steps in this project :
 
-1. Link Synapse Workspace Created to a Azure DevOps Repository
+1. [Link Synapse Workspace Created to a Azure DevOps Repository](https://docs.microsoft.com/en-us/azure/synapse-analytics/cicd/source-control)
 2. Developers Create a new branch to work on , this is done on the sandbox environment
 3. Developers check in changes and raise a Pull Request 
 4. Pull Request is merged into the release branch 
 5. Release Branch is Deployed into the Dev Environment using Azure DevOps Pipelines 
 6. Frozen Artifacts are deployed into Acceptance and Later production after integation tests have passed
+
+
