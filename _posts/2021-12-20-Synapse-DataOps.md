@@ -34,5 +34,7 @@ First step is to create a new branch , this can be done from synapse workspace i
 
 Once the branch has been created , the developer clones the project into his/her IDE of choice , in this case we use VS Code. Azure DevOps has a feature to directly clone this project into VSCode. Git Clone , could also be used to get this project locally into your IDE.
 
+![Clone Project](/images/clone_project.PNG)
+
 
 
