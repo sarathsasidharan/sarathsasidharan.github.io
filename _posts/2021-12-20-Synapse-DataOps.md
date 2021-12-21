@@ -36,5 +36,13 @@ Once the branch has been created , the developer clones the project into his/her
 
 ![Clone Project](/images/clone_project.PNG)
 
+#### Developers Create Features 
+
+After the branch is checked out for developement , the next step is for the developer to start working on the feature assinged in the current sprint.
+
+Taking an example of 3 artifacts being developed in this sprint , feature1 and feature2,feature3. Let's assume that feature1 is a functionality in spark , which is written inside a spark notebook and the second feature is a SQL Script which creates a new table and a stored procedure and feature3 consists of a mapping dataflow. In this situation we would like to check in 3 features which are all different scopes , into this single release.
+
+
+
 
 
