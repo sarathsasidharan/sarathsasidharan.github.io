@@ -5,13 +5,13 @@ published: true
 
 In this post we will cover an end to end synapse CI / CD implemenation for Data Lakes for enterprise deployments. 
 
-#### Pre-requisistes:
+### Pre-requisites:
 
 - [Azure Synapse Workspace](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-workspace)
 - [Azure DevOps Project](https://docs.microsoft.com/en-us/azure/devops/organizations/projects/create-project?view=azure-devops&tabs=preview-page) 
 - An IDE of your choice , for this blog i have used [VS Code](https://code.visualstudio.com/Download)
 
-#### Scenario : 
+### Scenario : 
 
 Steps in this project :
 
@@ -21,5 +21,13 @@ Steps in this project :
 4. Pull Request is merged into the release branch 
 5. Release Branch is Deployed into the Dev Environment using Azure DevOps Pipelines 
 6. Frozen Artifacts are deployed into Acceptance and Later production after integation tests have passed
+
+### Steps Elaborated :
+
+#### Developers Create Branch 
+
+Let us take the example of a sprint developement. As a developer A we create a new branch of our Synapse Workspace to start working on a feature which needs to be developed in this sprint.
+
+First step is to create a new branch , this can be done from synapse workspace in the sandbox environment. Point to note , on the sandbox environment there is one synapse workspace deployed , where developers have Syanpse Administrator Access.
 
 
