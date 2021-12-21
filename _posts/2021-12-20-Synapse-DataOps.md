@@ -28,6 +28,8 @@ Steps in this project :
 
 Let us take the example of a sprint developement. As a developer A we create a new branch of our Synapse Workspace to start working on a feature which needs to be developed in this sprint.
 
-First step is to create a new branch , this can be done from synapse workspace in the sandbox environment. Point to note , on the sandbox environment there is one synapse workspace deployed , where developers have Syanpse Administrator Access.
+First step is to create a new branch , this can be done from synapse workspace in the sandbox environment. Point to note , on the sandbox environment there is one synapse workspace deployed , where developers have Synapse Administrator Access.
+
+![Create Branch](/images/branching.PNG)
 
 
