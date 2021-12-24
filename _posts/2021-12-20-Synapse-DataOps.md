@@ -50,7 +50,7 @@ For this release , developer 1 has created 3 features for Release 1.0 . They are
 
 These generate 4 artifacts in our workspace, namely a spark notebook , a sql script , dataflow and a trigger file.
 
-
+![Features](/images/Features.PNG)
 
 
 
