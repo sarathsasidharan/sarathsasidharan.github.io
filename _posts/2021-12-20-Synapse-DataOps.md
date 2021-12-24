@@ -42,7 +42,7 @@ After the branch is checked out for developement , the next step is for the deve
 
 Taking an example of 3 artifacts being developed in this sprint , feature1 and feature2,feature3. Let's assume that feature1 is a functionality in spark , which is written inside a spark notebook and the second feature is a SQL Script which creates a new table and a stored procedure and feature3 consists of a mapping dataflow. In this situation we would like to check in 3 features which are all different scopes , into this single release.
 
-For this release , developer 1 has created 3 features. They are namely:
+For this release , developer 1 has created 3 features for Release 1.0 . They are namely:
 
 1. Spark notebook to peform an ELT and create a spark table 
 2. A SQL Script to create a new table and populate the data into the data mart
