@@ -44,7 +44,7 @@ Taking an example of 3 artifacts being developed in this sprint , feature1 and f
 
 For this release , developer 1 has created 3 features for Release 1.0 . They are namely:
 
-1. Spark notebook to peform an ELT and create a spark table 
+1. Spark notebook to perform an ELT and create a spark table 
 2. A SQL Script to create a new table and populate the data into the data mart
 3. A Data Flow to copy the data from staging area into the data mart and the corresponding trigger
 
