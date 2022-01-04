@@ -76,3 +76,4 @@ The basic pipeline script can be found [here](https://dev.azure.com/datalakemdw/
 
 ![PR Validation Pipeline](/images/PRPipeline.PNG)
 
+This pipeline uses a Pull Request trigger , which would mean every PR raised by the dev team , triggers this PR validation script which runs the Unit tests. If this test succeeds then a merge to main branch is done.
