@@ -52,5 +52,25 @@ These generate 4 artifacts in our workspace, namely a spark notebook , a sql scr
 
 ![Features](/images/Features.PNG)
 
+#### Developers Create Tests 
 
+After the feature have been created the next step is to create unit tests for these features.  We have 3 features :
+
+1. Pyspark script for extraction of raw to clean data
+2. Data Flow to get the data into a Kimball model 
+3. SQL objects 
+
+For testing , pyspark scripts we can use the pytest package and run asserts on the logic / functions.
+For SQL Objects the idea would be to leverage tsql-t and [sql server unit tests](https://docs.microsoft.com/en-us/sql/ssdt/walkthrough-creating-and-running-a-sql-server-unit-test?view=sql-server-ver15)
+
+![Tests](/images/Tests.PNG)
+
+
+#### Developers Create a Pull Request to Merge to main Branch
+
+Once the tests have been defined developers would like to push these 3 features into the main branch. In order to maintain sanity on the main branch , the need to have a pull request validation pipeline is essential.
+
+In order to to do this , a PR validation pipeline needs to be created in Azure DevOps.
+
+The basic pipeline script can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-test-python.yml)
 
