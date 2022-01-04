@@ -74,3 +74,5 @@ In order to to do this , a PR validation pipeline needs to be created in Azure D
 
 The basic pipeline script can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-test-python.yml)
 
+![PR Validation Pipeline](/images/PRPipeline.PNG)
+
