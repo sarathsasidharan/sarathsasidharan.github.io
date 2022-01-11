@@ -134,4 +134,7 @@ The input for the first pipleine (SQL Artifacts / Python Artifacts) is the build
 
 This should deploy the scripts as well as the dacpac build onto the target synapse workspace.
 
+These lists the steps needed to setup your CI/CD using azure synapse , in the next blog post we will cover :
 
+1. Serverless Artifacts Deployment
+2. Incremental Deployment
