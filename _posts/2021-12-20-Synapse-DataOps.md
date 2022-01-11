@@ -138,7 +138,47 @@ For this example lets take of example of developer 1 , who has created 8 feature
 
 ### 6.Pull Request is merged into the release branch 
 
-Once the pull request has been raised the PR pipelines are triggered automatically . For reference on the yml script for PR sql build scripts check [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-pr-test-sql.yml). For github this leverages the PR trigger which has been added inside the yml file . For azure devops though , you have to do it via the step described earlier (branches-> branch policy)
+Once the pull request has been raised the PR pipelines are triggered automatically . 
+
+Pipeline for PR sql build script
+
+```
+trigger: none
+
+pr:
+  branches:
+    include:
+    - main
+    - releases/*
+  paths:
+    exclude:
+    - README.md
+
+variables:
+  sqlDwPath: 'synapse/synapsepools'
+  sqlDwSolutionName: 'synapsepools'
+  sqlDwSolution: '$(sqlDwPath)/$(sqlDwSolutionName).sqlproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Debug'
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(sqlDwSolution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(sqlDwSolution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+```
+
+For github this leverages the PR trigger which has been added inside the yml file . For azure devops though , you have to do it via the step described earlier (branches-> branch policy)
 
 This would trigger the PR pipleines which have been configured to run the unit tests and create the build (for sql). The merge request would only succeed if the PR pipelines have run succesfully. 
 
