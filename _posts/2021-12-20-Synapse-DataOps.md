@@ -120,3 +120,9 @@ Here the Static Artifacts are refering to the python packages / libraries to be 
 
 ![Build](/images/Build.PNG)
 
+
+### Deploy Artifacts onto the main DEV worskpace
+
+Once the artifacts are ready , we have to deploy this to the DEV workspace. We could have it as 1 deployment pipeline , however for this blog we have 2 deployment pipelines one for the sql artifacts (Dedicated SQL Pools) and Python dependencies / packages and the second deployment pipeline for synapse workspace artifacts.
+
+The defintion for the SQL artifacts deployment pipleine can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release.yml) and the workspace deployment pipeline is [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml).
