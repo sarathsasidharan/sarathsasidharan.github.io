@@ -332,8 +332,67 @@ jobs:
           displayName: 'Deploy DACPAC to synapse dedicated sql pool'
 ```
 
+To deloy the workspace artifacts we have a separate pipeline.
 
-Workspace deployment pipeline defintion is found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml). This script refers to the workspace template file and the parameter file. This will deploy the linked services ,datasets , sql scripts , data flows.
+Workspace deployment pipeline defintion.
+
+```
+trigger: none
+
+pr: none
+
+resources:
+   repositories:
+   - repository: synapse_artifacts
+     type: git
+     name: synapsedelta/synapse-delta  
+     ref: workspace_publish
+
+stages:
+- stage: deploy_to_dev
+  displayName: 'Deploy to DEV'  
+  variables:
+  - group: mdwops-release-dev
+  jobs:
+   - template: jobs/deploy-synapse-ws.yml
+     parameters:
+      environmentName: 'DEV'
+      serviceConnection: 'SynapseDepolyment'
+```
+This script refers to the workspace template file and the parameter file. This will deploy the linked services ,datasets , sql scripts , data flows.
+
+The reference script used to deploy the synapse workspace is defined here :
+
+```
+parameters:
+- name: environmentName
+  type: string
+- name: serviceConnection
+  type: string
+
+jobs:
+- deployment: deploy_synapse_workspace
+  displayName: 'Deploy Synapse Workspace'
+  pool:
+    vmImage: 'windows-2019'
+  environment: ${{ parameters.environmentName }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: synapse_artifacts
+          path: 'workspace_publish' 
+        
+        - task: Synapse workspace deployment@1
+          inputs:
+            TemplateFile: '$(Pipeline.Workspace)/workspace_publish/idwdemows/TemplateForWorkspace.json'
+            ParametersFile: '$(Pipeline.Workspace)/workspace_publish/idwdemows/TemplateParametersForWorkspace.json'
+            azureSubscription: ${{ parameters.serviceConnection }}
+            ResourceGroupName: '$(rgName)'
+            TargetWorkspaceName: '$(synapseWorkspaceName)'
+            DeleteArtifactsNotInTemplate: false
+            OverrideArmParameters: '-AzureBlobStorage1_connectionString "<PARAM VALUE>" -MoviesSinkMart_connectionString "<PARAM VALUE>" -idwdemows-WorkspaceDefaultSqlServer_connectionString "<PARAM VALUE>"'
+```
 
 For deployment of synapse , we are using the [synapse workspace deployment task](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) extension. The workspace tempalate files are pointed to the workspace_publish branch.
 
