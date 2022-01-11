@@ -78,7 +78,41 @@ Once the tests have been defined developers would like to push these 3 features 
 
 In order to to do this , a PR validation pipeline needs to be created in Azure DevOps.
 
-The basic pipeline script can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-test-python.yml)
+The basic pipeline script for PR Validation for the python script :
+
+```
+trigger: none
+
+pr:
+  branches:
+    include:
+    - main
+    - releases/*
+  paths:
+    include:
+    - synapse-delta/src/tests/python*
+
+variables:
+  pythonWorkingDir: 'src/tests/python'
+
+pool:
+  vmImage: 'Ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.6'
+    architecture: 'x64'
+
+- script:  python -m pip install --upgrade pip
+           pip install pytest 
+          
+  displayName: 'Install pytest'
+
+- script: python -m pytest
+  workingDirectory: $(pythonWorkingDir)
+  displayName: 'Run unit tests'
+```
 
 ![PR Validation Pipeline](/images/PRPipeline.PNG)
 
