@@ -153,6 +153,23 @@ This occurs due to a lower build version of the synapse workspace extension , ma
 
 For Azure devops check the extension to make sure that the version attached is 1.9.3+
 
+#### Error during execution: Error: Failed to fetch the deployment status {"code":"400","message":"CreateOrUpdateNotebook failed
 
+![Error2](/images/Error2.PNG)
 
+This occurs if the spark pool name is different from the destination spark pool.
+
+Parameterizing this could help , so inside the notebook folders the bigdatapool name could be adjusted. The second option is to keep the names in sync.
+
+#### For Artifact: kv_supply_chain: ArtifactDeploymentTask status: 403; status message: Forbidden
+
+![Error3](/images/Error3.PNG)
+
+Check the permissions , if the service principle used for azure devops has the rights (Synapse Administrator) on the workspace to deploy Workspace artifacts.
+
+#### Encountered with exception:Error: Environment validation failed
+
+![Error 4](/images/Error4.PNG)
+
+This validation failure occurs when the parameters which need to be passed to the workspace are not passed. Make sure to overide parameters.
 
