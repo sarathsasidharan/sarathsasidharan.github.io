@@ -112,7 +112,11 @@ After the PR validation is done and the scripts have been merged into the main b
 1. Build artifacts for SQL , which include , dacpac build for SQL Dedicated Pools and Python packages / scripts and libraries to be installed
 2. Build artifacts for Workspace , which are , notebooks , sql scripts (SQL Serverless + SQL Scripts) , Data Flows , Triggers , Linked Services , Datasets etc.
 
-For step 2 , there is a manual process invovled , which would require us to publish the changes from the master branch. This generates the workspace template and also the parameter template which is automatically written into the workspace_publish branch. This will be automated in the future , where you could use a npm package to check this out automatically , rather than having to manually publish this.
+For step 2 , there is a manual process involved , which would require us to publish the changes from the main branch. This generates the workspace template and also the parameter template which is automatically written into the workspace_publish branch. This will be automated in the future , where you could use a npm package to check this out automatically , rather than having to manually publish this.
 
+The build pipeline is automatically triggered when a commit is done onto the main branch. The script defintion can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-build-artifacts.yml).
 
+Here the Static Artifacts are refering to the python packages / libraries to be installed on the cluster and the SQL Packages step in the build pipleine refers to the dacpac build creation for deployment.
+
+![Build](/images/Build.PNG)
 
