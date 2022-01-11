@@ -19,8 +19,9 @@ Steps in this project :
 2. Developers Create a new branch to work on , this is done on the sandbox environment
 3. Developers check in changes and raise a Pull Request 
 4. Pull Request is merged into the release branch 
-5. Release Branch is Deployed into the Dev Environment using Azure DevOps Pipelines 
-6. Frozen Artifacts are deployed into Acceptance and Later production after integation tests have passed
+5. Build Pipleine needs to be created which creates build artifacts for release step
+6. Release Branch is Deployed into the Dev Environment using Azure DevOps Pipelines 
+7. Frozen Artifacts are deployed into Acceptance and Later production after integation tests have passed
 
 ### Steps Elaborated :
 
@@ -103,6 +104,15 @@ Once the pull request has been raised the PR pipelines are triggered automatical
 This would trigger the PR pipleines which have been configured to run the unit tests and create the build (for sql). The merge request would only succeed if the PR pipelines have run succesfully. 
 
 ![Merge](/images/Merge.PNG)
+
+#### Build Pipelines for Generation of Build Artifacts
+
+After the PR validation is done and the scripts have been merged into the main branch . Next step is to bundle the artifacts for deployment. This process is split up into 2:
+
+1. Build artifacts for SQL , which include , dacpac build for SQL Dedicated Pools and Python packages / scripts and libraries to be installed
+2. Build artifacts for Workspace , which are , notebooks , sql scripts (SQL Serverless + SQL Scripts) , Data Flows , Triggers , Linked Services , Datasets etc.
+
+For step 2 , there is a manual process invovled , which would require us to publish the changes from the master branch. This generates the workspace template and also the parameter template which is automatically written into the workspace_publish branch. This will be automated in the future , where you could use a npm package to check this out automatically , rather than having to manually publish this.
 
 
 
