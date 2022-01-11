@@ -173,3 +173,8 @@ Check the permissions , if the service principle used for azure devops has the r
 
 This validation failure occurs when the parameters which need to be passed to the workspace are not passed. Make sure to overide parameters.
 
+### Error during execution: Error: Failed to parse package: Error: Could not figure out full dependancy model. Some dependancies may not exist in template
+
+![Error 5](/images/Error5.PNG)
+
+This issue happens if the build artifacts created are not of the right resoruce type which is expected by the deployment task.
