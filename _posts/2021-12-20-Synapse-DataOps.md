@@ -98,7 +98,7 @@ For this example lets take of example of developer 1 , who has created 8 feature
 
 This would trigger the PR pipleines which have been configured to run the unit tests and create the build (for sql). The merge request would only suceed if the PR pipelines have run succesfully. 
 
-
+![Merge](/images/Merge.PNG)
 
 
 
