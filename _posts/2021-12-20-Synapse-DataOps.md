@@ -82,4 +82,6 @@ Only if the tests and the build are succesful then the merge to main branch is m
 
 A validation check is placed on the merge to main branch , which always depends on the success of the PR pipeline.
 
-![PR Trigger on Main Branch](/images/PRRequest.PNG)
+This is done by setting the branch policy in Azure DevOps on the main Branch.
+
+![PR Validation](/images/PRValidation.PNG)
