@@ -96,7 +96,11 @@ For this example lets take of example of developer 1 , who has created 8 feature
 
 ![Pull Request](/images/PullRequest.PNG)
 
-This would trigger the PR pipleines which have been configured to run the unit tests and create the build (for sql). The merge request would only suceed if the PR pipelines have run succesfully. 
+#### Pull Request is merged into the release branch 
+
+Once the pull request has been raised the PR pipelines are triggered automatically . For reference on the yml script for PR sql build scripts check [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-pr-test-sql.yml). For github this leverages the PR trigger which has been added inside the yml file . For azure devops though , you have to do it via the step described earlier (branches-> branch policy)
+
+This would trigger the PR pipleines which have been configured to run the unit tests and create the build (for sql). The merge request would only succeed if the PR pipelines have run succesfully. 
 
 ![Merge](/images/Merge.PNG)
 
