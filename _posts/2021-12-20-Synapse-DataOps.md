@@ -89,3 +89,5 @@ This is done by setting the branch policy in Azure DevOps on the main Branch. Th
 Select the branch which needs to be checked before merge ( in this case master) and under the build validation , add the pipelines which needs to pass before the merge is succesful. This check prevents failed builds from landing on the main branch.
 
 ![PR Build Validation](/images/PRBuildValidation.PNG)
+
+Once this is setup , the next step is to raise the PR. 3 Features which the developers have build are ready to be shipped to the main branch. In order to do this , the developers create a PR to merge thier changes onto the main branch.
