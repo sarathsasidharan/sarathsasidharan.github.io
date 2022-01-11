@@ -25,7 +25,7 @@ Steps in this project :
 
 ### Steps Elaborated :
 
-#### Developers Create Branch 
+### Developers Create Branch 
 
 Let us take the example of a sprint developement. As a developer A we create a new branch of our Synapse Workspace to start working on a feature which needs to be developed in this sprint.
 
@@ -37,7 +37,7 @@ Once the branch has been created , the developer clones the project into his/her
 
 ![Clone Project](/images/clone_project.PNG)
 
-#### Developers Create Features 
+### Developers Create Features 
 
 After the branch is checked out for developement , the next step is for the developer to start working on the feature assinged in the current sprint.
 
@@ -53,7 +53,7 @@ These generate 4 artifacts in our workspace, namely a spark notebook , a sql scr
 
 ![Features](/images/Features.PNG)
 
-#### Developers Create Tests 
+### Developers Create Tests 
 
 After the feature have been created the next step is to create unit tests for these features.  We have 3 features :
 
@@ -67,7 +67,7 @@ For SQL Objects the idea would be to leverage tsql-t and [sql server unit tests]
 ![Tests](/images/Tests.PNG)
 
 
-#### Developers Create a Pull Request to Merge to main Branch
+### Developers Create a Pull Request to Merge to main Branch
 
 Once the tests have been defined developers would like to push these 3 features into the main branch. In order to maintain sanity on the main branch , the need to have a pull request validation pipeline is essential.
 
@@ -97,7 +97,7 @@ For this example lets take of example of developer 1 , who has created 8 feature
 
 ![Pull Request](/images/PullRequest.PNG)
 
-#### Pull Request is merged into the release branch 
+### Pull Request is merged into the release branch 
 
 Once the pull request has been raised the PR pipelines are triggered automatically . For reference on the yml script for PR sql build scripts check [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-pr-test-sql.yml). For github this leverages the PR trigger which has been added inside the yml file . For azure devops though , you have to do it via the step described earlier (branches-> branch policy)
 
@@ -105,7 +105,7 @@ This would trigger the PR pipleines which have been configured to run the unit t
 
 ![Merge](/images/Merge.PNG)
 
-#### Build Pipelines for Generation of Build Artifacts
+### Build Pipelines for Generation of Build Artifacts
 
 After the PR validation is done and the scripts have been merged into the main branch . Next step is to bundle the artifacts for deployment. This process is split up into 2:
 
@@ -125,7 +125,9 @@ Here the Static Artifacts are refering to the python packages / libraries to be 
 
 Once the artifacts are ready , we have to deploy this to the DEV workspace. We could have it as 1 deployment pipeline , however for this blog we have 2 deployment pipelines one for the sql artifacts (Dedicated SQL Pools) and Python dependencies / packages and the second deployment pipeline for synapse workspace artifacts.
 
-The defintion for the SQL artifacts deployment pipleine can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release.yml) and the workspace deployment pipeline is [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml).
+The defintion for the SQL artifacts deployment pipleine can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release.yml) and the workspace deployment pipeline is [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml). 
+
+The reference scripts for SQL Artifact is [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/jobs/deploy-ded-sql-pool.yml) and the one for workspace deployment can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/jobs/deploy-synapse-ws.yml) 
 
 The input for the first pipleine (SQL Artifacts / Python Artifacts) is the build artifact from the previous step , whereas for the second pipeline (Workspace artifacts) we are using the Worskpace Templates which are generated during the manual publish activty which we had described in the earlier section.
 
