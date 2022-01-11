@@ -193,7 +193,68 @@ After the PR validation is done and the scripts have been merged into the main b
 
 For step 2 , there is a manual process involved , which would require us to publish the changes from the main branch. This generates the workspace template and also the parameter template which is automatically written into the workspace_publish branch. This will be automated in the future , where you could use a npm package to check this out automatically , rather than having to manually publish this.
 
-The build pipeline is automatically triggered when a commit is done onto the main branch. The script defintion can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/ci-build-artifacts.yml).
+The build pipeline is automatically triggered when a commit is done onto the main branch.
+
+Build Artifacts Pipeline script :
+
+```
+trigger:
+  branches:
+    include:
+    - main
+    - release/*
+  paths:
+    include:
+    - synapse-delta/synapse/*
+
+pr: none
+
+variables:
+  sqlDwPath: 'synapse/synapsepools'
+  sqlDwSolutionName: 'synapsepools'
+  sqlDwSolution: '$(sqlDwPath)/$(sqlDwSolutionName).sqlproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Output'
+
+stages:
+- stage: 'publish_artifacts'
+  displayName: 'Publish Build Artifacts'
+  jobs:
+
+  - job: 'publish_static_artifacts'
+    displayName: 'Publish Static Artifacts'
+    pool:
+      vmImage: 'Ubuntu-latest'
+    steps:
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: 'synapse'
+        ArtifactName: 'synapse-artifacts'
+      displayName: 'Publish Synapse Artifacts'
+
+  - job: 'publish_sql_packages'
+    displayName: 'Publish SQL Packages'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(sqlDwSolution)'
+
+    - task: VSBuild@1
+      inputs:
+        solution: '$(sqlDwSolution)'
+        platform: '$(buildPlatform)'
+        configuration: 'Release'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(sqlDwPath)/bin/$(buildConfiguration)/synapsepools.dacpac'
+        ArtifactName: 'sql_dw_dacpac'
+      displayName: 'Publish SQL DACPAC'
+```
 
 Here the Static Artifacts are refering to the python packages / libraries to be installed on the cluster and the SQL Packages step in the build pipleine refers to the dacpac build creation for deployment.
 
@@ -204,8 +265,72 @@ Here the Static Artifacts are refering to the python packages / libraries to be 
 
 Once the artifacts are ready , we have to deploy this to the DEV workspace. We could have it as 1 deployment pipeline , however for this blog we have 2 deployment pipelines one for the sql artifacts (Dedicated SQL Pools) and Python dependencies / packages and the second deployment pipeline for synapse workspace artifacts.
 
-The defintion for the SQL artifacts deployment pipleine can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release.yml). This script picks up the artifacts from the build artifact which is created from the previous build pipeline. This contains the dacpac and the sql objects (Stored procedures).
+The defintion for the SQL artifacts deployment pipleine .
 
+SQL Deployment Pipeline defenition :
+
+```
+trigger: none
+
+pr: none
+
+resources:
+  pipelines:
+  - pipeline: ciartifacts
+    source: ci-artifacts
+    trigger: 
+      branches:
+      - main
+
+stages:
+- stage: deploy_to_dev
+  displayName: 'Deploy to DEV'  # In DEV, excludes publishing to Synapse workspace as this is a manual publish step
+  variables:
+  - group: mdwops-release-dev
+  jobs:
+  - template: jobs/deploy-ded-sql-pool.yml
+    parameters:
+      environmentName: 'DEV'
+      serviceConnection: 'SynapseDepolyment'
+```
+
+This script picks up the artifacts from the build artifact which is created from the previous build pipeline. This contains the dacpac and the sql objects (Stored procedures).
+
+The reference Deploy Pipeline Definiton used for dedicated Pool Deployment :
+
+```
+arameters:
+- name: environmentName
+  type: string
+- name: serviceConnection
+  type: string
+
+jobs:
+- deployment: deploy_dedicated_sql_pool
+  displayName: 'Deploy to synapse dedicated sql pool'
+  pool:
+    vmImage: 'windows-latest'
+  variables:
+    sqlProjName: synapsepools
+  environment: ${{ parameters.environmentName }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        # https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/deploy/sql-azure-dacpac-deployment?view=azure-devops
+        - task: SqlAzureDacpacDeployment@1
+          inputs:
+            azureSubscription: ${{ parameters.serviceConnection }}
+            AuthenticationType: 'server'
+            ServerName: $(synapseSqlPoolServer).sql.azuresynapse.net
+            DatabaseName: $(synapseDedicatedSqlPoolDBName)
+            SqlUsername: '$(synapseSqlPoolAdminUsername)'
+            SqlPassword: '$(synapseSqlPoolAdminPassword)'
+            deployType: 'DacpacTask'
+            DacpacFile: '$(Pipeline.Workspace)/ciartifacts/sql_dw_dacpac/$(sqlProjName).dacpac'
+            AdditionalArguments: '/Variables:ADLSLocation=abfss://datalake@$(datalakeAccountName).dfs.core.windows.net /Variables:ADLSCredentialKey=$(datalakeKey)'
+          displayName: 'Deploy DACPAC to synapse dedicated sql pool'
+```
 
 
 Workspace deployment pipeline defintion is found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml). This script refers to the workspace template file and the parameter file. This will deploy the linked services ,datasets , sql scripts , data flows.
