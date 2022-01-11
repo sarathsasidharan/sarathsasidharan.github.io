@@ -91,3 +91,8 @@ Select the branch which needs to be checked before merge ( in this case master) 
 ![PR Build Validation](/images/PRBuildValidation.PNG)
 
 Once this is setup , the next step is to raise the PR. 3 Features which the developers have build are ready to be shipped to the main branch. In order to do this , the developers create a PR to merge thier changes onto the main branch.
+
+For this example lets take of example of developer 1 , who has created 8 features for sql pools , 1 for elt (spark notebook) , 1 data flow and a trigger file.Once the local /sandbox tests are complete the developer is ready for pushing this to the master branch for the dev release.In order to do this , in this example the Pull request is raised from the Synapse Workspace UI which the developer has linked to his branch.
+
+![Pull Request](/images/PullRequest.PNG)
+
