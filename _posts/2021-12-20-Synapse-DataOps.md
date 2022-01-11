@@ -10,6 +10,7 @@ In this post we will cover an end to end synapse CI / CD implemenation for Data 
 - [Azure Synapse Workspace](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-workspace)
 - [Azure DevOps Project](https://docs.microsoft.com/en-us/azure/devops/organizations/projects/create-project?view=azure-devops&tabs=preview-page) 
 - An IDE of your choice , for this blog i have used [VS Code](https://code.visualstudio.com/Download)
+- [Synapse Workspace Deployment](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) extension on your azure devops project.
 
 ### Scenario : 
 
@@ -126,11 +127,13 @@ Here the Static Artifacts are refering to the python packages / libraries to be 
 
 Once the artifacts are ready , we have to deploy this to the DEV workspace. We could have it as 1 deployment pipeline , however for this blog we have 2 deployment pipelines one for the sql artifacts (Dedicated SQL Pools) and Python dependencies / packages and the second deployment pipeline for synapse workspace artifacts.
 
-The defintion for the SQL artifacts deployment pipleine can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release.yml) and the workspace deployment pipeline is [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml). 
+The defintion for the SQL artifacts deployment pipleine can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release.yml). This script picks up the artifacts from the build artifact which is created from the previous build pipeline. This contains the dacpac and the sql objects (Stored procedures).
 
-The reference scripts for SQL Artifact is [this](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/jobs/deploy-ded-sql-pool.yml) and the one for workspace deployment can be found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/jobs/deploy-synapse-ws.yml) 
 
-The input for the first pipleine (SQL Artifacts / Python Artifacts) is the build artifact, whereas for the second pipeline (Workspace artifacts) we are using the Worskpace Templates which are generated during the manual publish activty.
+
+Workspace deployment pipeline defintion is found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml). This script refers to the workspace template file and the parameter file. This will deploy the linked services ,datasets , sql scripts , data flows.
+
+For deployment of synapse , we are using the [synapse workspace deployment task](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) extension. The workspace tempalate files are pointed to the workspace_publish branch.
 
 This should deploy the scripts as well as the dacpac build onto the target synapse workspace.
 
@@ -138,3 +141,18 @@ These lists the steps needed to setup your CI/CD using azure synapse , in the ne
 
 1. Serverless Artifacts Deployment
 2. Incremental Deployment
+
+
+## Common Errors :
+
+#### Encountered with exception:Error: For Artifact <Lake Database>: Failure in deployment: Skipped
+
+![Error1](/images/Error1.PNG)
+
+This occurs due to a lower build version of the synapse workspace extension , make sure that the version is 1.9.3 or higher since the lower versions do not support the lake databases.
+
+For Azure devops check the extension to make sure that the version attached is 1.9.3+
+
+
+
+
