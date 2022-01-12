@@ -136,7 +136,7 @@ The defintion for the SQL artifacts deployment pipleine can be found [here](http
 
 Workspace deployment pipeline defintion is found [here](https://dev.azure.com/datalakemdw/synapsedelta/_git/synapse-delta?path=/devops/cd-release-syn.yml). This script refers to the workspace template file and the parameter file. This will deploy the linked services ,datasets , sql scripts , data flows.
 
-For deployment of synapse , we are using the [synapse workspace deployment task](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) extension. The workspace tempalate files are pointed to the workspace_publish branch.
+For deployment of synapse , we are using the [synapse workspace deployment task](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) extension. The workspace template files are pointed to the workspace_publish branch.
 
 This should deploy the scripts as well as the dacpac build onto the target synapse workspace.
 
@@ -150,7 +150,6 @@ These lists the steps needed to setup your CI/CD using azure synapse , in the ne
 
 ### Encountered with exception:Error: For Artifact <Lake Database>: Failure in deployment: Skipped
 
-![Error1](/images/Error1.PNG)
 
 This occurs due to a lower build version of the synapse workspace extension , make sure that the version is 1.9.3 or higher since the lower versions do not support the lake databases.
 
@@ -158,7 +157,6 @@ For Azure devops check the extension to make sure that the version attached is 1
 
 ### Error during execution: Error: Failed to fetch the deployment status {"code":"400","message":"CreateOrUpdateNotebook failed
 
-![Error2](/images/Error2.PNG)
 
 This occurs if the spark pool name is different from the destination spark pool.
 
@@ -166,18 +164,15 @@ Parameterizing this could help , so inside the notebook folders the bigdatapool 
 
 ### For Artifact: kv_supply_chain: ArtifactDeploymentTask status: 403; status message: Forbidden
 
-![Error3](/images/Error3.PNG)
 
 Check the permissions , if the service principle used for azure devops has the rights (Synapse Administrator) on the workspace to deploy Workspace artifacts.
 
 ### Encountered with exception:Error: Environment validation failed
 
-![Error 4](/images/Error4.PNG)
 
 This validation failure occurs when the parameters which need to be passed to the workspace are not passed. Make sure to overide parameters.
 
 ### Error during execution: Error: Failed to parse package: Error: Could not figure out full dependancy model. Some dependancies may not exist in template
 
-![Error 5](/images/Error5.PNG)
 
 This issue happens if the build artifacts created are not of the right resoruce type which is expected by the deployment task. Check if the build artifacts are generating the right resource types which the deployment taks is expecting. For example , the build artifact could be producing a azure dafa factory pipeline rather than a workspace pipeline , which are closely related but not the same.
