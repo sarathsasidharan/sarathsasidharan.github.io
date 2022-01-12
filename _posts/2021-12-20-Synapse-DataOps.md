@@ -79,6 +79,8 @@ Once the tests have been defined developers would like to push these 3 features 
 
 In order to to do this , a PR validation pipeline needs to be created in Azure DevOps.
 
+** Note :  Variable used in these scripts are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.**
+
 The basic pipeline script for PR Validation for the python script :
 
 ```
@@ -140,8 +142,6 @@ For this example lets take of example of developer 1 , who has created 8 feature
 ### 6.Pull Request is merged into the release branch 
 
 Once the pull request has been raised the PR pipelines are triggered automatically . 
-
-** Note :  Variable used in these scripts are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.**
 
 Pipeline for PR sql build script
 
