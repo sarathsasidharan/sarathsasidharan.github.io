@@ -4,12 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Technology Solution architect working to enable organizations to generate revenue from their data. Helping set up advanced data lakes and data analytics environments. Working on next-generation data architecture and AI capabilities to fuse intelligence derived from data.
 
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+Passionate about new and emerging technologies especially in the big data domain and combining these with Artificial Intelligence / Machine learning to predict/prescribe and empower individuals and organizations to achieve more from their data.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[sarathsasi87@gmail.com](mailto:sarathsasi87@gmail.com)
