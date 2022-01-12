@@ -14,6 +14,7 @@ For this blog we focus on using Azure DevOps as our Workspace Repository.
 - An IDE of your choice , for this blog i have used [VS Code](https://code.visualstudio.com/Download)
 - [Synapse Workspace Deployment](https://marketplace.visualstudio.com/items?itemName=AzureSynapseWorkspace.synapsecicd-deploy) extension on your azure devops project.
 - [SQL Server Extension For VS Code](https://docs.microsoft.com/en-us/sql/tools/visual-studio-code/sql-server-develop-use-vscode?view=sql-server-ver15)
+- [Service Connection](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) with contributor rights on the resource group and Synapse Administrator rights on the Workspace on higher envs.
 
 ### Scenario : 
 
