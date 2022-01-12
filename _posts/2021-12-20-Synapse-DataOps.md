@@ -79,7 +79,7 @@ Once the tests have been defined developers would like to push these 3 features 
 
 In order to to do this , a PR validation pipeline needs to be created in Azure DevOps.
 
-** Note :  Variable used in these scripts are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.**
+**Note :  Variable used in these scripts are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.**
 
 The basic pipeline script for PR Validation for the python script :
 
