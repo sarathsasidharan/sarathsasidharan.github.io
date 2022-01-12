@@ -179,6 +179,8 @@ steps:
     configuration: '$(buildConfiguration)'
 ```
 
+Note :  Variable used in these script are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.
+
 For github this leverages the PR trigger which has been added inside the yml file . For azure devops though , you have to do it via the step described earlier (branches-> branch policy)
 
 This would trigger the PR pipleines which have been configured to run the unit tests and create the build (for sql). The merge request would only succeed if the PR pipelines have run succesfully. 
@@ -256,6 +258,7 @@ stages:
         ArtifactName: 'sql_dw_dacpac'
       displayName: 'Publish SQL DACPAC'
 ```
+
 
 Here the Static Artifacts are refering to the python packages / libraries to be installed on the cluster and the SQL Packages step in the build pipleine refers to the dacpac build creation for deployment.
 
