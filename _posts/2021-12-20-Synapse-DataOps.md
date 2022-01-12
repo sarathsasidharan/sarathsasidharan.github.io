@@ -141,6 +141,8 @@ For this example lets take of example of developer 1 , who has created 8 feature
 
 Once the pull request has been raised the PR pipelines are triggered automatically . 
 
+** Note :  Variable used in these scripts are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.**
+
 Pipeline for PR sql build script
 
 ```
@@ -179,7 +181,7 @@ steps:
     configuration: '$(buildConfiguration)'
 ```
 
-Note :  Variable used in these script are set as variables within Azure DevOps within a [Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) , these values are stored inside Azure KeyVault for security purposes.
+
 
 For github this leverages the PR trigger which has been added inside the yml file . For azure devops though , you have to do it via the step described earlier (branches-> branch policy)
 
