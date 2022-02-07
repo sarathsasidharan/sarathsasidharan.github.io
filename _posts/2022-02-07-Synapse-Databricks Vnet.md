@@ -116,6 +116,36 @@ Retrieve the values from the key-vault backed databricks secret scope. Using the
 
 ![databricks notebook](/images/databricks_connect.PNG)
 
+Code used in the notebook
+
 ```
-TEST
+dwDatabase = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapseDatabase")
+dwServer = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapseServer")
+dwUser = dbutils.secrets.get(scope="synapsekeys01", key="databricksSqlUser")
+dwPass = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapsePoolsPwd")
+dwJdbcPort = "1433"
+dwJdbcExtraOptions = "encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.sql.azuresynapse.net;loginTimeout=30;"
+sqlDwUrl = "jdbc:sqlserver://"+ dwServer + ".sql.azuresynapse.net:"+dwJdbcPort+";database=" + dwDatabase + ";user="+dwUser+";password="+dwPass
+blobStorage = dbutils.secrets.get(scope="synapsekeys01", key="databricksBlobStorageName")
+blobContainer = "databricks"
+blobAccessKey = dbutils.secrets.get(scope="synapsekeys01", key="databricksBlobKey")
+tempDir = "wasbs://"+blobContainer+"@"+blobStorage+"/tempDirs"
+acntInfo = "fs.azure.account.key"+blobStorage
+```
+
+Make connection towards the synapse dedicated pools.
+
+```
+# Get some data from an Azure Synapse table.
+synapse_table = spark.read \
+  .format("com.databricks.spark.sqldw") \
+  .option("url", sqlDwUrl) \
+  .option("dbtable", "customer") \
+  .option("forwardSparkAzureStorageCredentials", "True") \
+  .option("tempdir", tempDir) \
+  .load()
+
+
+display(synapse_table.limit(10))
+
 ```
