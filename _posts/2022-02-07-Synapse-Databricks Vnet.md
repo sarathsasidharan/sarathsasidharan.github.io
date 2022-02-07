@@ -41,7 +41,7 @@ Next step is to restrict connectivity and remove our default network rules which
 
 Under this remove the default rule which gives access to all IPs.
 
-Disable the access to all azure services , by deselecting the checkbox. 
+Disable the access to all azure services , by de-selecting the checkbox. 
 
 ![network restriction](/images/network_restriction.PNG)
 
