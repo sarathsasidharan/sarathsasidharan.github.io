@@ -16,6 +16,13 @@ This blog focusses on how [Azure VNet Injected Databricks Cluster](https://docs.
 
 ### Scenario : 
 
+This is a common question which popped up at my customers, on how could we connect from databricks towards synapse dedicated pools.
+
+To address this an architecture on how the connectivity would work is provided here :
+
+[Connectivity Architecture](/images/databricks.png)
+
+
 Steps in this project :
 
 1. Create Synapse Workspace and restrict connectivity to Synapse Pools
