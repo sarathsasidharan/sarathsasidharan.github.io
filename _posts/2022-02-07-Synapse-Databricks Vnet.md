@@ -64,6 +64,7 @@ While creating a new cluster , the following resources are also deployed into th
 - Network Interface  / NICs
 - Public IP Addresses
 - Virtual Machines ( Nodes in the spark cluster)
+
 ![external resources](/images/ext_resources.png)
 
 These resources are automatically cleaned up when the cluster is terminated.
