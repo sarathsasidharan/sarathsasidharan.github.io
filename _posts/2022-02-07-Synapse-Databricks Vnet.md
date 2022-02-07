@@ -52,12 +52,18 @@ Deploy a databricks cluster inside your own VNet using [Vnet Injection](https://
 
 In order to do this , you will need to create 2 dedicated subnets per databricks workspace . One is a private subnet and another a public subnet. 
 
-Databricks creates a managed resource group which will deploy a storage account.  Databricks will be using the VNets supplied during the databricks deployment (customer VNet) . This is because we are using VNet Injection and not the default configuration which deploys it to a managed VNet.
+Databricks creates a managed resource group intow which a storage account is created.  Databricks will be using the VNets supplied during the databricks deployment (customer VNet) . This is because we are using VNet Injection and not the default configuration. 
 
 Databricks delegates the workpace to the subnet , which means the databricks workspace service could do changes on these subnets. There will also be intent policies which would be created to prevent users from altering the network configurations on the NSG inbound and outbound security rules.
 
 If this is not done ,  it can sabotage the communication from the data plane of databricks to the control pane managed by Microsoft. This is essential to maintain the SLAs which are provided by the cloud provider.
 
+While creating a new cluster , the following resources are also deployed into the managed resource group :
+
+- Disks
+- Network Interface  / NICs
+- Public IP Addresses
+- Virtual Machines ( Nodes in the spark cluster)
 
 
 
