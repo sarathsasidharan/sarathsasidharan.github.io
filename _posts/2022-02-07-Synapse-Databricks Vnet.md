@@ -48,7 +48,7 @@ Disable the access to all azure services , by de-selecting the checkbox.
 
 ### 2.Deploy Databricks Cluster inside your own VNet
 
-Deploy a databricks cluster inside your own VNet [Vnet Injection](https://docs.microsoft.com/en-us/azure/databricks/scenarios/quickstart-create-databricks-workspace-vnet-injection#:~:text=%20Create%20an%20Azure%20Databricks%20workspace%20%201,Networking%20%3E%20and%20apply%20the%20following...%20See%20More.)
+Deploy a databricks cluster inside your own VNet using [Vnet Injection](https://docs.microsoft.com/en-us/azure/databricks/scenarios/quickstart-create-databricks-workspace-vnet-injection#:~:text=%20Create%20an%20Azure%20Databricks%20workspace%20%201,Networking%20%3E%20and%20apply%20the%20following...%20See%20More.)
 
 In order to do this , you will need to create 2 dedicated subnets per databricks workspace . One is a private subnet and another a public subnet. 
 
