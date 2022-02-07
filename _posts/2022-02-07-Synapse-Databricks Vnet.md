@@ -90,6 +90,9 @@ This can be achieved using 2 methods :
 
 ** Please note that you cannot deploy a private link endpoint into a delegated vnet , so you cannot deploy this endpoint into the subnets delegated to the databricks service.
 
+For this blog , to keep it simple we are using the latter. We will create a new Subnet where the private link endpoint can be deployed. This subnet however belongs to the same VNet used by Databricks in the previous step.
+
+![synapse subnet](/images/synapse_subnet.PNG)
 
 ### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
 
