@@ -27,7 +27,7 @@ Steps in this project :
 
 1. Create Synapse Workspace and restrict connectivity to Synapse Pools
 2. Deploy Databricks Cluster inside your own VNet
-3. Create a Private Endpoint For Synapse Dedicated Pool
+3. Create a Private Link For Synapse Dedicated Pool
 4. Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
 
 
@@ -35,7 +35,12 @@ Steps in this project :
 
 ### 1. Create Synapse Workspace and restrict connectivity to Synapse Pools
 
-<TBD>
+During this step , setup a new [Synapse workspace](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-workspace).
+
+Next step is to restrict connectivity and remove our default network rules which allow every machine to access the workspace ( this is a default setting).
+
+![network restriction](/images/network_restriction.png)
+
 
 ### 2.Deploy Databricks Cluster inside your own VNet
 
