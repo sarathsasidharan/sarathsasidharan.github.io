@@ -155,7 +155,7 @@ display(synapse_table.limit(10))
 #### Issues Encountered :
 
 ```
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot open server '<Synapse Server Name>' requested by the login. Client with IP address '51.137.46.154' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. ClientConnectionId:<ID>
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot open server '<Synapse Server Name>' requested by the login. Client with IP address '<Public IP of databricks>' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. ClientConnectionId:<ID>
 	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
 	at com.microsoft.sqlserver.jdbc.TDSTokenHandler.onEOF(tdsparser.java:283)
 	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:129)
