@@ -102,4 +102,6 @@ Since they are within the same VNet , communication will happen automatically wi
 
 ### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
 
-<TBD>
+The last part of this demo is to conenct from our Databricks workspace deployed inside Customer VNet (VNet injected) to the synapse workspace deployed inside the customer VNet.
+
+
