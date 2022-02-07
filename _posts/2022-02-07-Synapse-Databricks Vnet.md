@@ -79,9 +79,9 @@ These resources are automatically cleaned up when the cluster is terminated.
 
 Thes VMs are attached to the private subnet which is provided during deployment. 
 
-### 3.Create a Private Endpoint For Synapse Dedicated Pool
+### 3.Create a Private Link For Synapse Dedicated Pool
 
-<TBD>
+In order to communicate from the databricks nodes to a dedicated SQL Pool instance , we will use [private links](https://docs.microsoft.com/en-us/azure/synapse-analytics/security/how-to-connect-to-workspace-with-private-links).
 
 
 ### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
