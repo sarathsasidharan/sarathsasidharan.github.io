@@ -39,7 +39,7 @@ During this step , setup a new [Synapse workspace](https://docs.microsoft.com/en
 
 Next step is to restrict connectivity and remove our default network rules which allow every machine to access the workspace ( this is a default setting).
 
-![network restriction](/images/network_restriction.png)
+![network restriction](/images/network_restriction.PNG)
 
 
 ### 2.Deploy Databricks Cluster inside your own VNet
