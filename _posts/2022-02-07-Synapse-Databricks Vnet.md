@@ -39,6 +39,10 @@ During this step , setup a new [Synapse workspace](https://docs.microsoft.com/en
 
 Next step is to restrict connectivity and remove our default network rules which allow every machine to access the workspace ( this is a default setting).
 
+Under this remove the default rule which gives access to all IPs.
+
+Disable the access to all azure services , by deselecting the checkbox. 
+
 ![network restriction](/images/network_restriction.PNG)
 
 
