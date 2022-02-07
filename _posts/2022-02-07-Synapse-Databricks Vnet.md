@@ -64,10 +64,11 @@ While creating a new cluster , the following resources are also deployed into th
 - Network Interface  / NICs
 - Public IP Addresses
 - Virtual Machines ( Nodes in the spark cluster)
+![external resources](/images/ext_resources.png)
 
+These resources are automatically cleaned up when the cluster is terminated.
 
-
-
+Thes VMs are attached to the private subnet which is provided during deployment. The public IPs inside the public subnet are used for the control pane communication.
 
 ### 3.Create a Private Endpoint For Synapse Dedicated Pool
 
