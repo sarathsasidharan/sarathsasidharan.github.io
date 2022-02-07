@@ -3,7 +3,7 @@ published: true
 ---
 ## How to Connect Databricks VNet Injected Cluster to Synapse Dedicated Pools
 
-This blog focusses on how could an [Azure VNet Injected Databricks Cluster](https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject) could connect to a Synapse Dedicated pool ,which dis-allows "any-ip" connectivity and also has not permited azure services to connect to it. 
+This blog focusses on how [Azure VNet Injected Databricks Cluster](https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject) could connect to a Synapse Dedicated pool ,which dis-allows "any-ip" connectivity and also has not permited azure services to connect to it. 
 
 
 
