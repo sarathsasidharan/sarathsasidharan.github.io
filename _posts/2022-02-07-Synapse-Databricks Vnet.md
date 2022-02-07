@@ -104,4 +104,9 @@ Since they are within the same VNet , communication will happen automatically wi
 
 The last part of this demo is to conenct from our Databricks workspace deployed inside Customer VNet (VNet injected) to the synapse workspace deployed inside the customer VNet.
 
+First step is to get all my secrets inside a key-vault backed ![databricks scope](https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes#akv-ss). 
+
+Store your synapse password used by the jdbc conneciton and account keys inside the azure keyvault.
+
+![key vault](/images/keyvault.PNG)
 
