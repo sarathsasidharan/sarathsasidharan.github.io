@@ -92,7 +92,7 @@ This can be achieved using 2 methods :
 
 For this blog , to keep it simple we are using the latter. We will create a new Subnet where the private link endpoint can be deployed. This subnet however belongs to the same VNet used by Databricks in the previous step.
 
-![private link](private_link.PNG)
+![private link](/images/private_link.PNG)
 
 This is the third subnet created to deploy the Synapse private link endpoint.
 
