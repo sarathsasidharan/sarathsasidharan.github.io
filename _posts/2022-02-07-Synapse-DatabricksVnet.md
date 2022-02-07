@@ -20,7 +20,7 @@ This is a common question which popped up at my customers, on how could we conne
 
 To address this an architecture on how the connectivity would work is provided here :
 
-[Connectivity Architecture](/images/databricks.png)
+![Connectivity Architecture](/images/databricks.png)
 
 
 Steps in this project :
