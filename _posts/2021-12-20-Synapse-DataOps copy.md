@@ -1,7 +1,7 @@
 ---
 published: true
 ---
-## How to Implement Synapse CI / CD for Data Lakes
+## Implement Synapse CI / CD for Data Lakes
 
 In this post we will cover an end to end synapse CI / CD implemenation for Data Lakes for enterprise deployments. This blog takes inspiration from the [Modern Data Warehouse](https://github.com/Azure-Samples/modern-data-warehouse-dataops/tree/main/e2e_samples/parking_sensors_synapse) which is based on the github repository. 
 
