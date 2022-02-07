@@ -83,6 +83,13 @@ Thes VMs are attached to the private subnet which is provided during deployment.
 
 In order to communicate from the databricks nodes to a dedicated SQL Pool instance , we will use [private links](https://docs.microsoft.com/en-us/azure/synapse-analytics/security/how-to-connect-to-workspace-with-private-links).
 
+This can be achieved using 2 methods :
+
+- Deploy Synapse Private Link in a second VNet and leverage VNet peering to help databricks clusters talk to synapse workspace dedicated pools
+- Deploy Synapse Private Link in the same VNet in a different Subnet. 
+
+** Please note that you cannot deploy a private link endpoint into a delegated vnet , so you cannot deploy this endpoint into the subnets delegated to the databricks service.
+
 
 ### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
 
