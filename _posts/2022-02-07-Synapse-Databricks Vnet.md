@@ -98,6 +98,8 @@ This is the third subnet created to deploy the Synapse private link endpoint.
 
 ![synapse subnet](/images/synapse_subnet.PNG)
 
+Since they are within the same VNet , communication will happen automatically without having to explicitly add my subnet range (of databricks) into the synapse workspace firewall rule.
+
 ### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
 
 <TBD>
