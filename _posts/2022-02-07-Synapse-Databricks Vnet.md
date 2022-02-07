@@ -110,3 +110,12 @@ Store your synapse password used by the jdbc conneciton and account keys inside 
 
 ![key vault](/images/keyvault.PNG)
 
+Create a new notebook and test out the connectivity , this is leveraging the synapse connector to connect to the dedicated pools.
+
+Retrieve the values from the key-vault backed databricks secret scope. Using the connector load the data into the dataframe and display the result to check if the connection was succesful.
+
+![databricks notebook](/images/databricks_connect.PNG)
+
+```
+TEST
+```
