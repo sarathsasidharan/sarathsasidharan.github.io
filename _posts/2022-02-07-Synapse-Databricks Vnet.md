@@ -52,7 +52,7 @@ Deploy a databricks cluster inside your own VNet using [Vnet Injection](https://
 
 Define a VNet where you would like to configure the subnets for databricks.
 
-[vnet ](/images/vnet.png)
+![vnet ](/images/vnet.png)
 
 In order to do this , you will need to create 2 dedicated subnets per databricks workspace . One is a private subnet and another a public subnet. 
 
