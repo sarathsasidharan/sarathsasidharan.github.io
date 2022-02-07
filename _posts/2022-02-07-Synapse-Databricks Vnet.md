@@ -118,6 +118,8 @@ Retrieve the values from the key-vault backed databricks secret scope. Using the
 
 Code used in the notebook
 
+Do make sure to replace the scope name "synapsekeys01" with the name of the scope you create in databricks.
+
 ```
 dwDatabase = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapseDatabase")
 dwServer = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapseServer")
