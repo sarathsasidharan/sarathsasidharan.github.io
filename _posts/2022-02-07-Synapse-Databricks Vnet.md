@@ -152,7 +152,7 @@ display(synapse_table.limit(10))
 
 ```
 
-Issues Encountered :
+#### Issues Encountered :
 
 ```
 Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot open server '<Synapse Server Name>' requested by the login. Client with IP address '51.137.46.154' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. ClientConnectionId:<ID>
@@ -161,6 +161,6 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot open server '
 	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:129)
 ```
 
-## Issue : The hostaname used inside the jdbc connection was wrong 
+### Issue : The hostaname used inside the jdbc connection was wrong 
 
 Resolution : Check if you are using the right hostname suffix ".sql.azuresynapse.net"
