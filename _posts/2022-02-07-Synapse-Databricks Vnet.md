@@ -56,7 +56,11 @@ Define a VNet where you would like to configure the subnets for databricks.
 
 In order to do this , you will need to create 2 dedicated subnets per databricks workspace . One is a private subnet and another a public subnet. 
 
-Databricks creates a managed resource group intow which a storage account is created.  Databricks will be using the VNets supplied during the databricks deployment (customer VNet) . This is because we are using VNet Injection and not the default configuration. 
+The private subnet is the address range used by the VMs which would be deployed during databricks cluster creation. The public IPs inside the public subnet are used for the communication between the data pane and the control pane.
+
+![subnets](/images/subnets.PNG)
+
+Databricks creates a managed resource group into which a storage account is created.  Databricks will be using the VNets supplied during the databricks deployment (customer VNet) . This is because we are using VNet Injection and not the default configuration. 
 
 Databricks delegates the workpace to the subnet , which means the databricks workspace service could do changes on these subnets. There will also be intent policies which would be created to prevent users from altering the network configurations on the NSG inbound and outbound security rules.
 
@@ -73,7 +77,7 @@ While creating a new cluster , the following resources are also deployed into th
 
 These resources are automatically cleaned up when the cluster is terminated.
 
-Thes VMs are attached to the private subnet which is provided during deployment. The public IPs inside the public subnet are used for the control pane communication.
+Thes VMs are attached to the private subnet which is provided during deployment. 
 
 ### 3.Create a Private Endpoint For Synapse Dedicated Pool
 
