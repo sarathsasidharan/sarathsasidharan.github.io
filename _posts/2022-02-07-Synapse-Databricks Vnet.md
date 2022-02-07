@@ -88,7 +88,7 @@ This can be achieved using 2 methods :
 - Deploy Synapse Private Link in a second VNet and leverage VNet peering to help databricks clusters talk to synapse workspace dedicated pools
 - Deploy Synapse Private Link in the same VNet in a different Subnet. 
 
-** Please note that you cannot deploy a private link endpoint into a delegated vnet , so you cannot deploy this endpoint into the subnets delegated to the databricks service.
+** Please note that you cannot deploy a private link endpoint into a delegated vnet , so you cannot deploy the synapse dedicated private link endpoint into the subnets delegated to the databricks service.
 
 For this blog , to keep it simple we are using the latter. We will create a new Subnet where the private link endpoint can be deployed. This subnet however belongs to the same VNet used by Databricks in the previous step.
 
