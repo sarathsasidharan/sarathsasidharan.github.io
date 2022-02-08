@@ -16,7 +16,7 @@ This blog focusses on how [Azure VNet Injected Databricks Cluster](https://docs.
 
 ### Scenario : 
 
-This is a common question which popped up at my customers, on how could we connect from databricks towards synapse dedicated pools.
+This is a common question which popped up at my customers, on how could we connect from vnet injected databricks towards a network restricted synapse dedicated pool.
 
 To address this an architecture on how the connectivity would work is provided here :
 
@@ -56,7 +56,7 @@ Define a VNet where you would like to configure the subnets for databricks.
 
 In order to do this , you will need to create 2 dedicated subnets per databricks workspace . One is a private subnet and another a public subnet. 
 
-The private subnet is the address range used by the VMs which would be deployed during databricks cluster creation. The public IPs inside the public subnet are used for the communication between the data pane and the control pane.
+The private subnet is the address range used by the VMs which would be deployed during databricks cluster creation. The public IPs inside the public subnet are used for the communication between the data plane and the control plane.
 
 ![subnets](/images/subnets.PNG)
 
@@ -98,13 +98,13 @@ This is the third subnet created to deploy the Synapse private link endpoint.
 
 ![synapse subnet](/images/synapse_subnet.PNG)
 
-Since they are within the same VNet , communication will happen automatically without having to explicitly add my subnet range (of databricks) into the synapse workspace firewall rule.
+Since they are within the same VNet , communication will happen automatically without having to explicitly add the subnet range (of databricks) into the synapse workspace firewall rule.
 
 ### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
 
 The last part of this demo is to conenct from our Databricks workspace deployed inside Customer VNet (VNet injected) to the synapse workspace deployed inside the customer VNet.
 
-First step is to get all my secrets inside a key-vault backed [databricks scope](https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes#akv-ss). 
+First step is to get all the secrets inside a key-vault backed [databricks scope](https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes#akv-ss). 
 
 Store your synapse password used by the jdbc conneciton and account keys inside the azure keyvault.
 
