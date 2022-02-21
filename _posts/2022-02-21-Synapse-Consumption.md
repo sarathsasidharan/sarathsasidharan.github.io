@@ -81,122 +81,20 @@ This subscription , hosts multiple resource groups :
 
 This is based on the [Enterprise Scale Analytics](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) recommendations
 
+Two Subscriptions are considered in this flow as an example. These are represented on the right and bottom of the data management subscription. 
 
-### 2.Deploy Databricks Cluster inside your own VNet
+APAC and Global HR (in Europe) are two subscriptions involved in this data access scenario.
 
-Deploy a databricks cluster inside your own VNet using [Vnet Injection](https://docs.microsoft.com/en-us/azure/databricks/scenarios/quickstart-create-databricks-workspace-vnet-injection#:~:text=%20Create%20an%20Azure%20Databricks%20workspace%20%201,Networking%20%3E%20and%20apply%20the%20following...%20See%20More.)
+Both these subscriptions are goverened by the central Data Management Contoso Subscription.
 
-Define a VNet where you would like to configure the subnets for databricks.
+## Scenario :
 
-![vnet ](/images/vnet.png)
+Let us assume APAC HR team wants to use data stored in the global HR systems for use case A.  The Global HR team , has data in an employee table which does contain data , not only for the APAC region , but the whole of Contoso. Due to heavy regulations (GDPR) , it is crucial to only let APAC see thier own data and not of any other region , which could lead to heavy penalties and fines.
 
-In order to do this , you will need to create 2 dedicated subnets per databricks workspace . One is a private subnet and another a public subnet. 
+In order to get this setup working , these are the steps followed :
 
-The private subnet is the address range used by the VMs which would be deployed during databricks cluster creation. The public IPs inside the public subnet are used for the communication between the data plane and the control plane.
+1. [Azure purview](https://docs.microsoft.com/en-us/azure/purview/overview#:~:text=Azure%20Purview%20is%20a%20unified%20data%20governance%20service,discovery%2C%20sensitive%20data%20classification%2C%20and%20end-to-end%20data%20lineage.) is setup in the data management subscription , inside the governance-rg resource group.
+2. Global HR setups a consumption zone , where the business objects ( in this case Employee Entity) / Entities are loaded based on an SLA on data quality and avaiability . This could be a consumption folder on the storage account provisioned inside the storage-rg resource group.
+3. A view [(Synapse Serverless View)](https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/create-use-views) is created on top of this entity (Employee).
+4. 
 
-![subnets](/images/subnets.PNG)
-
-Databricks creates a managed resource group into which a storage account is created.  Databricks will be using the VNets supplied during the databricks deployment (customer VNet) . This is because we are using VNet Injection and not the default configuration. 
-
-Databricks delegates the workpace to the subnet , which means the databricks workspace service could do changes on these subnets. There will also be intent policies which would be created to prevent users from altering the network configurations on the NSG inbound and outbound security rules.
-
-If this is not done ,  it can sabotage the communication from the data plane of databricks to the control pane managed by Microsoft. This is essential to maintain the SLAs which are provided by the cloud provider.
-
-While creating a new cluster , the following resources are also deployed into the managed resource group :
-
-- Disks
-- Network Interface  / NICs
-- Public IP Addresses
-- Virtual Machines ( Nodes in the spark cluster)
-
-![external resources](/images/ext_resources.png)
-
-These resources are automatically cleaned up when the cluster is terminated.
-
-Thes VMs are attached to the private subnet which is provided during deployment. 
-
-### 3.Create a Private Link For Synapse Dedicated Pool
-
-In order to communicate from the databricks nodes to a dedicated SQL Pool instance , we will use [private links](https://docs.microsoft.com/en-us/azure/synapse-analytics/security/how-to-connect-to-workspace-with-private-links).
-
-This can be achieved using 2 methods :
-
-- Deploy Synapse Private Link in a second VNet and leverage VNet peering to help databricks clusters talk to synapse workspace dedicated pools
-- Deploy Synapse Private Link in the same VNet in a different Subnet. 
-
-** Please note that you cannot deploy a private link endpoint into a delegated vnet , so you cannot deploy the synapse dedicated private link endpoint into the subnets delegated to the databricks service.
-
-For this blog , to keep it simple we are using the latter. We will create a new Subnet where the private link endpoint can be deployed. This subnet however belongs to the same VNet used by Databricks in the previous step.
-
-![private link](/images/private_link.PNG)
-
-This is the third subnet created to deploy the Synapse private link endpoint.
-
-![synapse subnet](/images/synapse_subnet.PNG)
-
-Since they are within the same VNet , communication will happen automatically without having to explicitly add the subnet range (of databricks) into the synapse workspace firewall rule.
-
-### 4.Connect from Databricks to Synapse Dedicated Pools using Private Endpoint
-
-The last part of this demo is to connect from the Databricks workspace deployed inside Customer VNet (VNet injected) to the synapse workspace deployed inside the customer VNet.
-
-First step is to get all the secrets inside a key-vault backed [databricks scope](https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes#akv-ss). 
-
-Store your synapse password used by the jdbc connection and account keys inside the azure keyvault.
-
-![key vault](/images/keyvault.PNG)
-
-Create a new notebook and test out the connectivity , this is leveraging the synapse connector to connect to the dedicated pools.
-
-Retrieve the values from the key-vault backed databricks secret scope. Using the connector load the data into the dataframe and display the result to check if the connection was succesful.
-
-![databricks notebook](/images/databricks_connect.PNG)
-
-Code used in the notebook
-
-Do make sure to replace the scope name "synapsekeys01" with the name of the scope you create in databricks.
-
-```
-dwDatabase = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapseDatabase")
-dwServer = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapseServer")
-dwUser = dbutils.secrets.get(scope="synapsekeys01", key="databricksSqlUser")
-dwPass = dbutils.secrets.get(scope="synapsekeys01", key="databricksSynapsePoolsPwd")
-dwJdbcPort = "1433"
-dwJdbcExtraOptions = "encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.sql.azuresynapse.net;loginTimeout=30;"
-sqlDwUrl = "jdbc:sqlserver://"+ dwServer + ".sql.azuresynapse.net:"+dwJdbcPort+";database=" + dwDatabase + ";user="+dwUser+";password="+dwPass
-blobStorage = dbutils.secrets.get(scope="synapsekeys01", key="databricksBlobStorageName")
-blobContainer = "databricks"
-blobAccessKey = dbutils.secrets.get(scope="synapsekeys01", key="databricksBlobKey")
-tempDir = "wasbs://"+blobContainer+"@"+blobStorage+"/tempDirs"
-acntInfo = "fs.azure.account.key"+blobStorage
-```
-
-Make connection towards the synapse dedicated pools.
-
-```
-# Get some data from an Azure Synapse table.
-synapse_table = spark.read \
-  .format("com.databricks.spark.sqldw") \
-  .option("url", sqlDwUrl) \
-  .option("dbtable", "customer") \
-  .option("forwardSparkAzureStorageCredentials", "True") \
-  .option("tempdir", tempDir) \
-  .load()
-
-
-display(synapse_table.limit(10))
-
-```
-
-#### Issues Encountered :
-
-```
-Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot open server '<Synapse Server Name>' requested by the login. Client with IP address '<Public IP of databricks>' is not allowed to access the server.  To enable access, use the Windows Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range.  It may take up to five minutes for this change to take effect. ClientConnectionId:<ID>
-	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:262)
-	at com.microsoft.sqlserver.jdbc.TDSTokenHandler.onEOF(tdsparser.java:283)
-	at com.microsoft.sqlserver.jdbc.TDSParser.parse(tdsparser.java:129)
-```
-
-### Issue : The hostaname used inside the jdbc connection was wrong 
-
-Resolution : Check if you are using the right hostname suffix ".sql.azuresynapse.net"
