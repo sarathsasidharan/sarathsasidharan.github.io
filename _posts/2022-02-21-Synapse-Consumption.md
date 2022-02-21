@@ -35,15 +35,18 @@ Other landing zones deployed in wave 1 are :
 - HR 
 
 
-### 1. Create Synapse Workspace and restrict connectivity to Synapse Pools
+### Consumption Patterns
 
-During this step , setup a new [Synapse workspace](https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-create-workspace).
+As any other company , contoso has requirements for all 3 modes :
 
-Next step is to restrict connectivity and remove our default network rules which allow every machine to access the workspace ( this is a default setting).
+- Batch Mode
+- API Mode
+- Streaming Mode
 
-Under this remove the default rule which gives access to all IPs.
+## Batch Mode
 
-Disable the access to all azure services , by de-selecting the checkbox. 
+
+
 
 ![network restriction](/images/network_restriction.PNG)
 
