@@ -57,6 +57,10 @@ So to keep it short , assume the data is on the consumption zone ready for teams
 
 ![Batch Consumption](/images/batch_access.png)
 
+Majority of data access on the lake for the initial stages is served from this pattern. Historically batch data is provided as extracts on a schedule ( monthly/weekly/daily/hourly) or on an event based trigger.
+
+## Flow Explained
+
 
 ### 2.Deploy Databricks Cluster inside your own VNet
 
