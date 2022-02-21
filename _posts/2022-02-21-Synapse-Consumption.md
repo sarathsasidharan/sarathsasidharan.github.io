@@ -32,12 +32,12 @@ Other landing zones deployed in wave 1 are :
 - EMEA 
 - AMERICAS 
 - Global Finance 
-- HR 
+- Global HR 
 
 
 ### Consumption Patterns
 
-As any other company , contoso has requirements for all 3 modes :
+As any other company , contoso has requirements for all 3 consumption modes :
 
 - Batch Mode
 - API Mode
@@ -45,10 +45,17 @@ As any other company , contoso has requirements for all 3 modes :
 
 ## Batch Mode
 
+The most commonly used pattern at contoso , even today is batch mode. More than 80% of data analytics at contoso is done using the batch mode.
 
+A typical Data warehousing pattern is adopted here too . Usual suspects of Data Loading from On premises , CRM sytems and third party DaaS (Data As a Service Providers).
 
+Data Processing is done using an ELT approach and served in the consumption zone.
 
-![network restriction](/images/network_restriction.PNG)
+For this blog we will focus on the consumption part , we will have a seperate blog which discusses the data processing options on the Lake house pattern on Azure.
+
+So to keep it short , assume the data is on the consumption zone ready for teams / reporting layers to consume.
+
+![Batch Consumption](/images/batch_layer.png)
 
 
 ### 2.Deploy Databricks Cluster inside your own VNet
