@@ -100,7 +100,7 @@ In order to get this setup working , these are the steps followed :
 5. Purview is going to scan the serverless view and the storage entity ( Employee) and the metadata rolls up to purview.
 6. Now the metadata is available and published for other branches to find.
 
-# Access Pattern For APAC
+### Access Pattern For APAC
 
 Once the data is registered in the catalog , the next step is for the branch to find the data they are interested in.
 
