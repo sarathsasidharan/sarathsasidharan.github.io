@@ -96,5 +96,14 @@ In order to get this setup working , these are the steps followed :
 1. [Azure purview](https://docs.microsoft.com/en-us/azure/purview/overview#:~:text=Azure%20Purview%20is%20a%20unified%20data%20governance%20service,discovery%2C%20sensitive%20data%20classification%2C%20and%20end-to-end%20data%20lineage.) is setup in the data management subscription , inside the governance-rg resource group.
 2. Global HR setups a consumption zone , where the business objects ( in this case Employee Entity) / Entities are loaded based on an SLA on data quality and avaiability . This could be a consumption folder on the storage account provisioned inside the storage-rg resource group.
 3. A view [(Synapse Serverless View)](https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/create-use-views) is created on top of this entity (Employee).
-4. 
+4. Create a [Role Based Access Control](https://techcommunity.microsoft.com/t5/azure-synapse-analytics-blog/how-to-implement-row-level-security-in-serverless-sql-pools/ba-p/2354759) on the view which can meet the governance rule we have explained earlier ( in the scenario section).
+5. Purview is going to scan the serverless view and the storage entity ( Employee) and the metadata rolls up to purview.
+
+# Access Pattern For APAC
+
+Once the data is registered in the catalog , the next step is for the branch to find the data they are interested in.
+
+Steps explained :
+
+
 
