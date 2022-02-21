@@ -20,7 +20,7 @@ Based on the [Enterprise Scale Analytics](https://docs.microsoft.com/en-us/azure
 In this setup we have a data management subscription ( Blue Circle) , which is a central data platform team responsible for :
 
 - Providing Skeleton for Infrastructure for Branches to build on
-- Making sure governance is in check (non-negotiables) , using azure policies
+- Making sure governance is in check (non-negotiables) , using [azure policies](https://docs.microsoft.com/en-us/azure/governance/policy/overview#:~:text=Azure%20Policy%20helps%20to%20enforce%20organizational%20standards%20and,to%20drill%20down%20to%20the%20per-resource%2C%20per-policy%20granularity.)
 - Providing Interfaces / Best practises for teams to leverage
 - Sample DevOps Pipeleines / DataOps Pipelines for Teams to leverage and build on
 - Data Project Templates which could be used by teams / branches
@@ -73,7 +73,7 @@ These are :
 - Connectivity 
 - Networking 
 
-This is based on the [enterprise scale landing zone](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/) recommendation. The assumption is that ESLZ has been followed at contoso and the core cloud platfrom team has already deployed these subscrptions and the base platform is ready to be built.
+This is based on the [enterprise scale landing zone](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/) recommendation. The assumption is that ESLZ has been followed at contoso and the core cloud platform team has already deployed these subscrptions and the base platform is ready to be built.
 
 The Data Platform team , builds on top of the ESLZ setup.  A dedicated data managment subscription , named Data Management Subscription Contoso has been setup.
 
@@ -92,7 +92,7 @@ APAC and Global HR (in Europe) are two subscriptions involved in this data acces
 Both these subscriptions are goverened by the central Data Management Contoso Subscription.
 
 
-* In order to get this setup working , these are the steps followed :
+In order to get this setup working , these are the steps followed :
 
 1. [Azure purview](https://docs.microsoft.com/en-us/azure/purview/overview#:~:text=Azure%20Purview%20is%20a%20unified%20data%20governance%20service,discovery%2C%20sensitive%20data%20classification%2C%20and%20end-to-end%20data%20lineage.) is setup in the data management subscription , inside the governance-rg resource group.
 2. Global HR setups a consumption zone , where the business objects ( in this case Employee Entity) / Entities are loaded based on an SLA on data quality and avaiability . This could be a consumption folder on the storage account provisioned inside the storage-rg resource group.
