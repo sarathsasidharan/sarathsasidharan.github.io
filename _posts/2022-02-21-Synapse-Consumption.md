@@ -119,6 +119,11 @@ To be specific , as an example lets says contoso has 5 Million customers worldwi
 
 ## API Mode
 
-This is to accommodate API access to datasets on the  data lake. The idea is to expose business objects as APIs for teams to consume. This supports the microservices approach , where the data is offered as a product via APIs.
-Versions /Quality  and documentation of the APIs are the responsibility of the data owners. This information needs to be registered centrally and should be available for other teams to search for.
-Automated process for granting access control to data needs to be in place.
+This is to accommodate API access to datasets on the  data lake (In this case Employee Entity).
+
+The idea is to expose business objects as APIs for teams to consume. This supports the microservices approach , where the data is offered as a product via APIs.
+
+Versions /Quality  and documentation of the APIs are the responsibility of the data owners. This information needs to be registered centrally and should be available for other teams to search for which is done via Purview in this case.
+Automated process for [granting access control](https://docs.microsoft.com/en-us/azure/purview/how-to-data-owner-policy-authoring-generic) to data needs to be in place.
+
+
