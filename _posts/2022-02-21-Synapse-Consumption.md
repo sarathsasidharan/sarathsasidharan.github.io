@@ -98,6 +98,7 @@ In order to get this setup working , these are the steps followed :
 3. A view [(Synapse Serverless View)](https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/create-use-views) is created on top of this entity (Employee).
 4. Create a [Role Based Access Control](https://techcommunity.microsoft.com/t5/azure-synapse-analytics-blog/how-to-implement-row-level-security-in-serverless-sql-pools/ba-p/2354759) on the view which can meet the governance rule we have explained earlier ( in the scenario section).
 5. Purview is going to scan the serverless view and the storage entity ( Employee) and the metadata rolls up to purview.
+6. Now the metadata is available and published for other branches to find.
 
 # Access Pattern For APAC
 
