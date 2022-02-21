@@ -100,11 +100,17 @@ In order to get this setup working , these are the steps followed :
 5. Purview is going to scan the serverless view and the storage entity ( Employee) and the metadata rolls up to purview.
 6. Now the metadata is available and published for other branches to find.
 
-### Access Pattern For APAC
+#### Access Pattern For Branch 
 
 Once the data is registered in the catalog , the next step is for the branch to find the data they are interested in.
 
 Steps explained :
 
+1. Branch Persona , business analyst / data anlayst is using his tool for data analysis. In this case , APAC is using azure synapse. Purview is natively integrated into synapse , so the user will search for this entity (Employee) in the central catalog , to find where does this data exist. 
+[purivew_synapse integration](/images/purview_search.PNG)
+2. 
+
+
+3. 
 
 
