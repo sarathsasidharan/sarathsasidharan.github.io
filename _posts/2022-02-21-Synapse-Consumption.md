@@ -55,7 +55,7 @@ For this blog we will focus on the consumption part , we will have a seperate bl
 
 So to keep it short , assume the data is on the consumption zone ready for teams / reporting layers to consume.
 
-![Batch Consumption](/images/batch_layer.png)
+![Batch Consumption](/images/batch_access.png)
 
 
 ### 2.Deploy Databricks Cluster inside your own VNet
