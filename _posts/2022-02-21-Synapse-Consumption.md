@@ -110,7 +110,7 @@ Steps explained :
 
 ![purivew_synapse integration](/images/purview_search.PNG)
 
-2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. 
+2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. [link](https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)
 3. The BA / DA will fire the select * from Employee ( View)
 4. The RLS which is applied on the serverless view kicks in and only returns the values which the APAC BA / DA are eligible to view.
 
