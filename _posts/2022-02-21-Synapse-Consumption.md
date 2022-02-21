@@ -59,7 +59,27 @@ So to keep it short , assume the data is on the consumption zone ready for teams
 
 Majority of data access on the lake for the initial stages is served from this pattern. Historically batch data is provided as extracts on a schedule ( monthly/weekly/daily/hourly) or on an event based trigger.
 
-## Flow Explained
+### Flow Explained
+
+This architecture represents the data access pattern mapped to an azure data plaform. The dotted rectangles in the picture , represent core subscriptions.
+
+These are :
+- Identity 
+- Management 
+- Connectivity 
+- Networking 
+
+This is based on the [enterprise scale landing zone](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/) recommendation. The assumption is that ESLZ has been followed at contoso and the core cloud platfrom team has already deployed these subscrptions and the base platform is ready to be built.
+
+The Data Platform team , builds on top of the ESLZ setup.  A dedicated data managment subscription , named Data Management Subscription Contoso has been setup.
+
+This subscription , hosts multiple resource groups :
+
+- network-rg ( for networking related resources)
+- global-dns-rg
+- governance-rg (for data governance resoruces)
+
+This is based on the [Enterprise Scale Analytics](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) recommendations
 
 
 ### 2.Deploy Databricks Cluster inside your own VNet
