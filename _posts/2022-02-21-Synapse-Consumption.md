@@ -17,15 +17,23 @@ Based on the [Enterprise Scale Analytics](https://docs.microsoft.com/en-us/azure
 ![Contoso Mesh](/images/contoso_data_mesh.png)
 
 
-Steps in this project :
+In this setup we have a data management subscription ( Blue Circle) , which is a central data platform team responsible for :
 
-1. Create Synapse Workspace and restrict connectivity to Synapse Pools
-2. Deploy Databricks Cluster inside your own VNet
-3. Create a Private Link For Synapse Dedicated Pool
-4. Connect from Databricks to Synapse Dedicated Pools using Private Link.
+- Providing Skeleton for Infrastructure for Branches to build on
+- Making sure governance is in check (non-negotiables) , using azure policies
+- Providing Interfaces / Best practises for teams to leverage
+- Sample DevOps Pipeleines / DataOps Pipelines for Teams to leverage and build on
+- Data Project Templates which could be used by teams / branches
 
+Assuming this team is funded by the headquarters , we have this subscription in Europe.
 
-### Steps Elaborated :
+Other landing zones deployed in wave 1 are :
+
+- EMEA 
+- AMERICAS 
+- Global Finance 
+- HR 
+
 
 ### 1. Create Synapse Workspace and restrict connectivity to Synapse Pools
 
