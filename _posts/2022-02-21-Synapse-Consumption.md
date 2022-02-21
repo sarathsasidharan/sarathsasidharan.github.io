@@ -37,7 +37,7 @@ Other landing zones deployed in wave 1 are :
 
 ## Scenario :
 
-Let us assume APAC HR team wants to use data stored in the global HR systems for use case A.  The Global HR team , has data in an employee table which does contain data , not only for the APAC region , but the whole of Contoso. Due to heavy regulations (GDPR) , it is crucial to only let APAC see thier own data and not of any other region , which could lead to heavy penalties and fines.
+Let us assume APAC HR team wants to use data stored in the global HR systems for use case A.  The Global HR team , has data  as an Employee Entity , not only for the APAC region , but the whole of Contoso. Due to heavy regulations (GDPR) , it is crucial to only let APAC see thier own data and not of any other region , which could lead to heavy penalties and fines.
 
 ### Consumption Patterns
 
