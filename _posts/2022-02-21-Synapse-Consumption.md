@@ -166,12 +166,14 @@ As soon as purview scans the new resource this flow should be applicable automat
 
 4. The request first hits an API Managment Layer where the API is registered.
 
-5. Azure function corresponding is triggered which in turn triggers a stored procedure on the global hr workspace.
+5. The Azure Function Registered with the API Management layer is triggered with the parameters passed (database name and entity name) 
 
-6. This Stored procedure , executes the select * on Employee View , which has Row Level Security Applied.
+6. The Function in turn triggers a stored procedure on the global hr Synapse analytics workspace.
 
-7. So this SP returns only the Employee values which APAC is supposed to see in the return Payload.
+6. This Stored procedure , executes the select * on Employee View , which has [Row Level Security](https://techcommunity.microsoft.com/t5/azure-synapse-analytics-blog/how-to-implement-row-level-security-in-serverless-sql-pools/ba-p/2354759) applied to it.
 
-8. Function returns back the data as a payload 
+7. Stored Procedure returns only the Employee values which APAC is supposed to see in the return Payload.
+
+8. Azure Function returns back the data as a payload requested by the client ( Branch APAC)
 
 ** For large datasets concepts like pagination have to be applied / option to do a bulk load by dynamically generating an Syanpse Pipeliene based on thresholds could be considered.
