@@ -126,4 +126,6 @@ The idea is to expose business objects as APIs for teams to consume. This suppor
 Versions /Quality  and documentation of the APIs are the responsibility of the data owners. This information needs to be registered centrally and should be available for other teams to search for which is done via Purview in this case.
 Automated process for [granting access control](https://docs.microsoft.com/en-us/azure/purview/how-to-data-owner-policy-authoring-generic) to data needs to be in place.
 
+![api-access](/images/API_Access.png)
+
 
