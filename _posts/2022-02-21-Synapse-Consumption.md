@@ -51,7 +51,7 @@ As any other company , contoso has requirements for all 3 consumption modes :
 
 The most commonly used pattern at contoso , even today is batch mode. More than 80% of data analytics at contoso is done using the batch mode.
 
-A typical Data warehousing pattern is adopted here too . Usual suspects of Data Loading from On premises , CRM sytems and third party DaaS (Data As a Service Providers).
+A typical Data warehousing pattern is adopted here too . Usual suspects of Data Loading from On premises , CRM systems and third party DaaS (Data As a Service Providers).
 
 Data Processing is done using an ELT approach and served in the consumption zone.
 
