@@ -35,6 +35,10 @@ Other landing zones deployed in wave 1 are :
 - Global HR 
 
 
+## Scenario :
+
+Let us assume APAC HR team wants to use data stored in the global HR systems for use case A.  The Global HR team , has data in an employee table which does contain data , not only for the APAC region , but the whole of Contoso. Due to heavy regulations (GDPR) , it is crucial to only let APAC see thier own data and not of any other region , which could lead to heavy penalties and fines.
+
 ### Consumption Patterns
 
 As any other company , contoso has requirements for all 3 consumption modes :
@@ -87,9 +91,6 @@ APAC and Global HR (in Europe) are two subscriptions involved in this data acces
 
 Both these subscriptions are goverened by the central Data Management Contoso Subscription.
 
-## Scenario :
-
-Let us assume APAC HR team wants to use data stored in the global HR systems for use case A.  The Global HR team , has data in an employee table which does contain data , not only for the APAC region , but the whole of Contoso. Due to heavy regulations (GDPR) , it is crucial to only let APAC see thier own data and not of any other region , which could lead to heavy penalties and fines.
 
 In order to get this setup working , these are the steps followed :
 
@@ -116,4 +117,8 @@ Steps explained :
 
 To be specific , as an example lets says contoso has 5 Million customers worldwide.  APAC has 2 Million customers in this mix , so the current setup should only return the 2 Million rows. 
 
+## API Mode
 
+This is to accommodate API access to datasets on the  data lake. The idea is to expose business objects as APIs for teams to consume. This supports the microservices approach , where the data is offered as a product via APIs.
+Versions /Quality  and documentation of the APIs are the responsibility of the data owners. This information needs to be registered centrally and should be available for other teams to search for.
+Automated process for granting access control to data needs to be in place.
