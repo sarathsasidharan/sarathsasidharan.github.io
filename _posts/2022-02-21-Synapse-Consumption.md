@@ -170,6 +170,7 @@ As soon as purview scans the new resource this flow should be applicable automat
 
 ** For large datasets concepts like pagination have to be applied / option to do a bulk load by dynamically generating an Syanpse Pipeliene based on thresholds could be considered.
 
+<Work on Streaming Mode is in Progress will be updated soon>
 
 
 
