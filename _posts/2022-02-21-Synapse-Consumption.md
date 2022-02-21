@@ -107,10 +107,13 @@ Once the data is registered in the catalog , the next step is for the branch to 
 Steps explained :
 
 1. Branch Persona , business analyst / data anlayst is using his tool for data analysis. In this case , APAC is using azure synapse. Purview is natively integrated into synapse , so the user will search for this entity (Employee) in the central catalog , to find where does this data exist. 
-[purivew_synapse integration](/images/purview_search.PNG)
-2. 
 
+![purivew_synapse integration](/images/purview_search.PNG)
 
-3. 
+2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. 
+3. The BA / DA will fire the select * from Employee ( View)
+4. The RLS which is applied on the serverless view kicks in and only returns the values which the APAC BA / DA are eligible to view.
+
+To be specific , as an example lets says contoso has 5 Million customers worldwide.  APAC has 2 Million customers in this mix , so the current setup should only return the 2 Million rows. 
 
 
