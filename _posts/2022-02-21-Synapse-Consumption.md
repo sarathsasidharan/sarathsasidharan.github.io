@@ -161,11 +161,17 @@ As soon as purview scans the new resource this flow should be applicable automat
 ![purivew_synapse integration](/images/purview_search.PNG)
 
 2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. [link](https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)
+
 3. The BA / DA will fire the query(GET call) using a client of choice like [postman](https://www.postman.com/) , with database and entity as parameters
+
 4. The request first hits an API Managment Layer where the API is registered.
+
 5. Azure function corresponding is triggered which in turn triggers a stored procedure on the global hr workspace.
-6. This Stored procedure , executes the select * on Employee View , which has Row Level Security Applied
+
+6. This Stored procedure , executes the select * on Employee View , which has Row Level Security Applied.
+
 7. So this SP returns only the Employee values which APAC is supposed to see in the return Payload.
+
 8. Function returns back the data as a payload 
 
 ** For large datasets concepts like pagination have to be applied / option to do a bulk load by dynamically generating an Syanpse Pipeliene based on thresholds could be considered.
