@@ -92,7 +92,7 @@ APAC and Global HR (in Europe) are two subscriptions involved in this data acces
 Both these subscriptions are goverened by the central Data Management Contoso Subscription.
 
 
-In order to get this setup working , these are the steps followed :
+* In order to get this setup working , these are the steps followed :
 
 1. [Azure purview](https://docs.microsoft.com/en-us/azure/purview/overview#:~:text=Azure%20Purview%20is%20a%20unified%20data%20governance%20service,discovery%2C%20sensitive%20data%20classification%2C%20and%20end-to-end%20data%20lineage.) is setup in the data management subscription , inside the governance-rg resource group.
 2. Global HR setups a consumption zone , where the business objects ( in this case Employee Entity) / Entities are loaded based on an SLA on data quality and avaiability . This could be a consumption folder on the storage account provisioned inside the storage-rg resource group.
@@ -101,7 +101,7 @@ In order to get this setup working , these are the steps followed :
 5. Purview is going to scan the serverless view and the storage entity ( Employee) and the metadata rolls up to purview.
 6. Now the metadata is available and published for other branches to find.
 
-#### Access Pattern For Branch 
+#### Access Pattern For Branch in Batch Mode
 
 Once the data is registered in the catalog , the next step is for the branch to find the data they are interested in.
 
@@ -129,6 +129,49 @@ Automated process for [granting access control](https://docs.microsoft.com/en-us
 ![api-access](/images/API_Access.png)
 
 ### Flow Explained For API Access
+
+#### Setup
+
+Three subscriptions are in place for this example. There is one central data management subscription. Similar to the previous setup there is a governance-rg (resource group) in which there are two resources.
+
+- [API Managment Layer](https://docs.microsoft.com/en-us/azure/api-management/api-management-key-concepts) ( For registering APIs for data on Serverless Views)
+- [Azure Purview](https://docs.microsoft.com/en-us/azure/purview/overview#:~:text=Azure%20Purview%20is%20a%20unified%20data%20governance%20service,discovery%2C%20sensitive%20data%20classification%2C%20and%20end-to-end%20data%20lineage.) (For Catalog and Access Management)
+
+# Steps for API Data Access
+
+To continue with the story of APAC HR data access from the global HR platform. Consider that the steps* mentioned ealier are completed ( Purview Scan and data entity registration).
+
+There is an additional step / custom work which the data managment team needs to build.
+
+In order to build an API layer on top of the data entity an Azure function is created.
+
+This function needs to take the input database , and entity name as parameters which fire a query onto the serverless layer.
+
+There needs to be a second custom function ( in this case a stored procedure on the serverless side) , which would be triggered during the call and should return the json / payload.
+
+This Azure function , should be able to pass the identity of the user / application requesting the call to the serverless layer.
+
+As soon as purview scans the new resource this flow should be applicable automatically since the function and the Stored procedure are utilities which would be existing on the central platform and the workspace.
+
+
+#### Access Pattern For Branch in API Mode
+
+1. Branch Persona , Application user  / Data Analyst search for this data on pruview (Employee)
+
+![purivew_synapse integration](/images/purview_search.PNG)
+
+2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. [link](https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)
+3. The BA / DA will fire the query(GET call) using a client of choice like [postman](https://www.postman.com/) , with database and entity as parameters
+4. The request first hits an API Managment Layer where the API is registered.
+5. Azure function corresponding is triggered which in turn triggers a stored procedure on the global hr workspace.
+6. This Stored procedure , executes the select * on Employee View , which has Row Level Security Applied
+7. So this SP returns only the Employee values which APAC is supposed to see in the return Payload.
+8. Function returns back the data as a payload 
+
+** For large datasets concepts like pagination have to be applied / option to do a bulk load by dynamically generating an Syanpse Pipeliene based on thresholds could be considered.
+
+
+
 
 
 
