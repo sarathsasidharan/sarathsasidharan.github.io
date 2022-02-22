@@ -11,7 +11,7 @@ Lets assume a company named Contoso. Contoso is headquartered in Europe and has 
 
 The company is building their lake house architecture on Azure. 
 
-Based on the [Enterprise Scale Analytics](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) practises , lets assume this setup.
+Based on the [Data Management & Analytics Scenario](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) practises , lets assume this setup.
 
 
 ![Contoso Mesh](/images/contoso_data_mesh.png)
@@ -83,7 +83,7 @@ This subscription , hosts multiple resource groups :
 - global-dns-rg
 - governance-rg (for data governance resoruces)
 
-This is based on the [Enterprise Scale Analytics](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) recommendations
+This is based on the [Data Management & Analytics Scenario](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) recommendations
 
 Two Subscriptions are considered in this flow as an example. These are represented on the right and bottom of the data management subscription. 
 
@@ -160,7 +160,7 @@ As soon as purview scans the new resource this flow should be applicable automat
 
 ![purivew_synapse integration](/images/purview_search.PNG)
 
-2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. [link](https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)
+2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this [live view]((https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)) , where the data sits.
 
 3. The BA / DA will fire the query(GET call) using a client of choice like [postman](https://www.postman.com/) , with database and entity as parameters
 
