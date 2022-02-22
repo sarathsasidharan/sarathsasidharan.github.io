@@ -162,7 +162,7 @@ As soon as purview scans the new resource this flow should be applicable automat
 
 2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this [live view]((https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)) , where the data sits.
 
-3. The BA / DA will fire the query(GET call) using a client of choice , for ex. [postman](https://www.postman.com/) , with database name and entity name as parameters . For This example , database name = "apac" and entity name = "employee"
+3. The BA / DA will fire the query(GET call) using a client of choice , for ex. [postman](https://www.postman.com/) , with database name and entity name as parameters . For This example , database name = "hr_erp" and entity name = "employee"
 
 4. The request first hits an API Managment Layer where the API is registered.
 
