@@ -95,9 +95,9 @@ Both these subscriptions are goverened by the central Data Management Contoso Su
 In order to get this setup working , these are the steps followed :
 
 1. [Azure purview](https://docs.microsoft.com/en-us/azure/purview/overview#:~:text=Azure%20Purview%20is%20a%20unified%20data%20governance%20service,discovery%2C%20sensitive%20data%20classification%2C%20and%20end-to-end%20data%20lineage.) is setup in the data management subscription , inside the governance-rg resource group.
-2. Global HR setups a consumption zone , where the business objects ( in this case Employee Entity) / Entities are loaded based on an SLA on data quality and avaiability . This could be a consumption folder on the storage account provisioned inside the storage-rg resource group.
+2. Global HR setups a consumption zone , where the business objects ( in this case Employee Entity) / Entities are loaded based on an SLA on data quality and availability . This could be a consumption folder on the storage account provisioned inside the storage-rg resource group.
 3. A view [(Synapse Serverless View)](https://docs.microsoft.com/en-us/azure/synapse-analytics/sql/create-use-views) is created on top of this entity (Employee).
-4. Create a [Role Based Access Control](https://techcommunity.microsoft.com/t5/azure-synapse-analytics-blog/how-to-implement-row-level-security-in-serverless-sql-pools/ba-p/2354759) on the view which can meet the governance rule we have explained earlier ( in the scenario section).
+4. Create a [Role Based Access Control / Row Level Security](https://techcommunity.microsoft.com/t5/azure-synapse-analytics-blog/how-to-implement-row-level-security-in-serverless-sql-pools/ba-p/2354759) on the view which can meet the governance rule we have explained earlier ( in the scenario section).
 5. Purview is going to scan the serverless view and the storage entity ( Employee) and the metadata rolls up to purview.
 6. Now the metadata is available and published for other branches to find.
 
@@ -113,7 +113,7 @@ Steps explained :
 
 2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this live view , where the data sits. [link](https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)
 3. The BA / DA will fire the select * from Employee ( View)
-4. The RLS which is applied on the serverless view kicks in and only returns the values which the APAC BA / DA are eligible to view.
+4. The RLS aka Row Level Security, which is applied on the serverless view kicks in and only returns the values which the APAC BA / DA are eligible to view.
 
 To be specific , as an example lets says contoso has 5 Million customers worldwide.  APAC has 2 Million customers in this mix , so the current setup should only return the 2 Million rows. 
 
@@ -145,11 +145,11 @@ There is an additional step / custom work which the data managment team needs to
 
 In order to build an API layer on top of the data entity an Azure function is created.
 
-This function needs to take the input database , and entity name as parameters which fire a query onto the serverless layer.
+This function needs to take the input database (on serverless) , and entity (on serverless) name as parameters which fire a query onto the serverless layer.
 
-There needs to be a second custom function ( in this case a stored procedure on the serverless side) , which would be triggered during the call and should return the json / payload.
+There needs to be a second action ( in this case a stored procedure on the serverless side) , which would be triggered during the call and should return the json / payload.
 
-This Azure function , should be able to pass the identity of the user / application requesting the call to the serverless layer.
+This Azure function , should be able to pass the identity of the user / application requesting the call to the serverless layer. ( This assumes only AAD access is permited on the Synapse Layer)
 
 As soon as purview scans the new resource this flow should be applicable automatically since the function and the Stored procedure are utilities which would be existing on the central platform and the workspace.
 
@@ -162,7 +162,7 @@ As soon as purview scans the new resource this flow should be applicable automat
 
 2. Purview returns the metadata and location information of the Employee Entity . The BA / DA could explore the metadata and then directly access this [live view]((https://docs.microsoft.com/en-us/azure/synapse-analytics/catalog-and-governance/how-to-discover-connect-analyze-azure-purview)) , where the data sits.
 
-3. The BA / DA will fire the query(GET call) using a client of choice like [postman](https://www.postman.com/) , with database and entity as parameters
+3. The BA / DA will fire the query(GET call) using a client of choice , for ex. [postman](https://www.postman.com/) , with database name and entity name as parameters . For This example , database name = "apac" and entity name = "employee"
 
 4. The request first hits an API Managment Layer where the API is registered.
 
