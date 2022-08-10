@@ -3,7 +3,7 @@ published: false
 ---
 ## Automate Extraction and Deployment of  Synapse Dedicated Environments using Azure DevOps
 
-There are many scenarios where you want to re-create your synapse dedicated pool environment in another dedicated pool.Your company may want to copy the environment without the data to recreate an environment.
+There are many scenarios where you want to re-create your synapse dedicated pool environment into another dedicated pool.Your company may want to copy the environment without the data to recreate an environment.
 
 While dealing with this on restrictive environments , performing this operation needs higher rights.
 
