@@ -1,45 +1,21 @@
 ---
 published: false
 ---
-## Quick Fix : SQL71501 Build Failing for Synapse Dedicated on VS , Unresolved reference on sys schema 
+## Automate Extraction and Deployment of  Synapse Dedicated Environments using Azure DevOps
 
-Trying to build a Synapse Dedicated Pool project on Visual Studio and the build is failing with unresolved object errors.
+There are many scenarios where you want to re-create your synapse dedicated pool environment in another environment. It could be that you want to copy 
+the environment without the data to recreate an env for development / other purposes.
 
-Well , this post should save you some time and effort.
+While dealing with this on restrictive environments , performing this operation needs higher rights on the environment which opens a whole lot of security 
+concerns.
 
 ## Scenario :
 
 While implementing CI/CD for Synapse , customer would like to import the DDLs for a database into the database project in Visual Studio. Once the database has been imported, sometimes customers face depedency problems which needs to be fixed. 
 
-One such common error are unresolved reference on sys schema / information_schema ,which complain that it cant recongize the columns. These are compilation errors and the builds cannot run.
+One such common error are unresolved reference on sys schema / information_schema ,which complain that it cant recongize the columns. These are compilation errors and the builds fails.
 
-
-
-
-
-Based on the [Data Management & Analytics Scenario](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/data-management/) practises , lets assume this setup.
-
-
-![Contoso Mesh](/images/contoso_data_mesh.png)
-
-
-In this setup we have a data management subscription ( Blue Circle) , which is a central data platform team responsible for :
-
-- Providing Skeleton for Infrastructure for Branches to build on
-- Making sure governance is in check (non-negotiables) , using [azure policies](https://docs.microsoft.com/en-us/azure/governance/policy/overview#:~:text=Azure%20Policy%20helps%20to%20enforce%20organizational%20standards%20and,to%20drill%20down%20to%20the%20per-resource%2C%20per-policy%20granularity.)
-- Providing Interfaces / Best practises for teams to leverage
-- Sample DevOps Pipeleines / DataOps Pipelines for Teams to leverage and build on
-- Data Project Templates which could be used by teams / branches
-
-Assuming this team is funded by the headquarters , we have this subscription in Europe.
-
-Other landing zones deployed in wave 1 are :
-
-- EMEA 
-- AMERICAS 
-- Global Finance 
-- Global HR 
-
+In order to start from scratch please follow this [link]() 
 
 ## Scenario :
 
