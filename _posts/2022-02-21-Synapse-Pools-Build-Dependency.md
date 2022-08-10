@@ -19,3 +19,6 @@ In this blog we are going to use the [SQL Package activity](https://docs.microso
 ### High Level Architecture 
 
 ![Replicate Environments](/images/sql-package.png)
+
+This scenario imitates a dedicated hotfix subscription , which is used to get the current environment to recreate / test issues happening on 
+the live environment. Azure DevOps is used to automatically extract the deployment artifact [dacpac](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16)
