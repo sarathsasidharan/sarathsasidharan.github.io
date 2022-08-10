@@ -48,7 +48,7 @@ This task connects to the Syanpse Dedicated Pools and starts extracting the dacp
 ![figure1](/images/deploy.png)
 
 # Code snippet for deployment to the target environment 
-https://github.com/sarathsasidharan/sarathsasidharan.github.io/blob/b822ce588b1328abf73cb6e37269d2326223b261/code/sqlpackage/deploysql.yml#L1-L33
+https://github.com/sarathsasidharan/sarathsasidharan.github.io/blob/b822ce588b1328abf73cb6e37269d2326223b261/code/sqlpackage/deploysql.yml#L22-L33
 
 After the extraction of the dacpac is complete , the next task in the pipeline is triggered. This has to pick up the extracted artifact from the source dedicated pool and deploy it in a sink dedicated pool. This is also achieved using a SQL Package activity. Second Service connection is used to connect to the second subscription.The credentials for the sink dedicated pool are picked up from the key vault , via the variable groups (as discussed in the previous step). 
 
