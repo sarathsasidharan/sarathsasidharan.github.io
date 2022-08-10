@@ -3,7 +3,7 @@ published: false
 ---
 ## Automate Extraction and Deployment of  Synapse Dedicated Environments using Azure DevOps
 
-There are many scenarios where you want to re-create your synapse dedicated pool environment in another environment.Your company may want to copy the environment without the data to recreate an environment for development / other purposes.
+There are many scenarios where you want to re-create your synapse dedicated pool environment in another environment.Your company may want to copy the environment without the data to recreate an environment.
 
 While dealing with this on restrictive environments , performing this operation needs higher rights.
 
@@ -39,4 +39,6 @@ After the details have been extracted the pipeline , next goes towards the first
 
 This task connects to the Syanpse Dedicated Pools and starts extracting the dacpac , which contains all the information needed to recreate this environment on a different pool. All these tasks are run on VMs which are called [Azure Pipeline Agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops&tabs=browser) /build agents. The resulting dacpac extracted from the source dedicated pool is written into the local storage of the build agent. If you are using separate pipelines to extract and deploy the artifact then you need to store this artifact in an [azure artifact](https://docs.microsoft.com/en-us/azure/devops/artifacts/start-using-azure-artifacts?view=azure-devops). This artifact can then later be retrieved in the second pipeline , to deploy the artifact. In this scenario we have just one single pipeline to extract and deploy , hence we will refer to the local drive of the build agent.
 
-After the extraction of the dacpac is complete , the next task in the pipeline is triggered. This has to pick up the extracted artifact from the source dedicated pool and deploy it in a sink dedicated pool. This is also achieved using a SQL Package activity. Second Service connection is used to connect to the second subscription.The credentials for the sink dedicated pool are picked up from the key vault , via the variable groups (as seen in the previous step). 
+After the extraction of the dacpac is complete , the next task in the pipeline is triggered. This has to pick up the extracted artifact from the source dedicated pool and deploy it in a sink dedicated pool. This is also achieved using a SQL Package activity. Second Service connection is used to connect to the second subscription.The credentials for the sink dedicated pool are picked up from the key vault , via the variable groups (as discussed in the previous step). 
+
+A connection is established to the sink dedicated  pool and the extracted dacpac is deployed. After a succesful deployment all objects in the source pool will be visible in the sink pool.
