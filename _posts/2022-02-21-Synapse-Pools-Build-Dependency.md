@@ -15,3 +15,7 @@ These operations have to be controlled and automated if possible to make sure :
   4. Secure usage
 
 In this blog we are going to use the [SQL Package activity](https://docs.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage-pipelines?view=sql-server-ver16) as a task in azure devops to help us achieve this.
+
+### High Level Architecture 
+
+![Replicate Environments](/images/sql-package.png)
