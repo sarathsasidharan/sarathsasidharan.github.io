@@ -31,7 +31,7 @@ The pipleine to create the package and deploy it is built within azure devops.
 
 ### Workflow Explained
 
-The trigger for this workflows starts with an Azure DevOps Pipeline. In this scenario 2 [service connections](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) need to be created which have rights to extract the warehouse artifacts from Synapse Dedicated pool in the source subscription and deploy the same in a sink subscription.
+The trigger for this workflow starts with an Azure DevOps Pipeline. In this scenario two [service connections](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) need to be created which have rights to extract the warehouse artifacts from Synapse Dedicated pool in the source subscription and deploy the artifact in a sink subscription.
 
 Once the pipeline within Azure DevOps is triggered. The secrets (keys / connection details etc.) of the source synapse dedicated pool are retrieved. This is stored within [variable groups](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) of Azure DevOps. Variable Groups are used to store values and secrets which need to be passed into the pipelines. Variable groups can be linked to azure key vault.This makes is quite secure , so we have the sensitive identity and connection details locked inside an azure [key vault](https://docs.microsoft.com/en-us/azure/key-vault/general/basic-concepts) which is an HSM Solution on azure.
 
