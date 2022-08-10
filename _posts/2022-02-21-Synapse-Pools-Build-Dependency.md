@@ -22,3 +22,12 @@ In this blog we are going to use the [SQL Package activity](https://docs.microso
 
 This scenario imitates a dedicated hotfix subscription , which is used to get the current environment to recreate / test issues happening on 
 the live environment. Azure DevOps is used to automatically extract the deployment artifact [dacpac](https://docs.microsoft.com/en-us/sql/relational-databases/data-tier-applications/data-tier-applications?view=sql-server-ver16)
+
+In this setup we use the link between [azure devops and azure key vault](https://docs.microsoft.com/en-us/azure/devops/pipelines/release/azure-key-vault?view=azure-devops&tabs=yaml) to store secrets / connection strings which secure the pipeline.
+
+Two separate resource groups have been defined , security resource group which contains the key-vault and the analytics-rg which contains the synapse workspace and the storage account.
+
+### Workflow Explained
+
+The trigger for this workflows starts with an Azure DevOps Pipeline. In this scenario 2 service connections need to be created which have rights to extract the warehouse artifacts from Synapse Dedicated pool in the source subscription and deploy the same in a sink subscription.
+
