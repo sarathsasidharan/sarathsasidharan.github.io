@@ -43,4 +43,4 @@ After the extraction of the dacpac is complete , the next task in the pipeline i
 
 A connection is established to the sink dedicated  pool and the extracted dacpac is deployed. After a succesful deployment all objects in the source pool will be visible in the sink pool.
 
-https://github.com/sarathsasidharan/sarathsasidharan.github.io/blob/81233c921f0be1f20d00605cec9926a789134bcc/code/sqlpackage/deploysql.yml
+
