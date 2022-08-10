@@ -27,7 +27,11 @@ In this setup we use the link between [azure devops and azure key vault](https:/
 
 Two separate resource groups have been defined , security resource group which contains the key-vault and the analytics-rg which contains the synapse workspace and the storage account.
 
+The pipleine to create the package and deploy it is built within azure devops.
+
 ### Workflow Explained
 
-The trigger for this workflows starts with an Azure DevOps Pipeline. In this scenario 2 service connections need to be created which have rights to extract the warehouse artifacts from Synapse Dedicated pool in the source subscription and deploy the same in a sink subscription.
+The trigger for this workflows starts with an Azure DevOps Pipeline. In this scenario 2 [service connections](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) need to be created which have rights to extract the warehouse artifacts from Synapse Dedicated pool in the source subscription and deploy the same in a sink subscription.
+
+
 
