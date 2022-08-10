@@ -1,0 +1,33 @@
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    azureSubscription: <name_of_service_connection>
+    AuthenticationType: 'server'
+    ServerName: <source_dwh>.sql.azuresynapse.net
+    DatabaseName: '<source_dwh_database>'
+    SqlUsername: '<source_dwh_username>'
+    SqlPassword: '<source_dwh_pwd>'
+    deployType: 'DacpacTask'
+    DeploymentAction: Extract
+    DacpacFile: '$(sqlProjName).dacpac'
+    # AdditionalArguments: '/Variables:ADLSLocation=abfss://datalake@$(datalakeAccountName).dfs.core.windows.net /Variables:ADLSCredentialKey=$(datalakeKey)'
+    displayName: 'Extract DACPAC From Source synapse dedicated sql pool'
+
+- task: SqlAzureDacpacDeployment@1
+  inputs:
+    azureSubscription: <name_of_service_connection>
+    AuthenticationType: 'server'
+    ServerName: <destination_dwh>.sql.azuresynapse.net
+    DatabaseName: '<destination_dwh_database>'
+    SqlUsername: '<destination_dwh_username>'
+    SqlPassword: '<destination_dwh_password>'
+    deployType: 'DacpacTask'
+    DacpacFile: 'GeneratedOutputFiles/<name_of_src_dwh>.dacpac'
+    # AdditionalArguments: '/Variables:ADLSLocation=abfss://datalake@$(datalakeAccountName).dfs.core.windows.net /Variables:ADLSCredentialKey=$(datalakeKey)'
+    displayName: 'Deploy DACPAC to synapse dedicated sql pool'
