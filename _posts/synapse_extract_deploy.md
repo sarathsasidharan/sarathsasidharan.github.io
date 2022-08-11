@@ -65,6 +65,8 @@ This task connects to the Syanpse Dedicated Pools and starts extracting the dacp
 
 ![figure1](/images/deploy.png)
 
+This flow represents on how the azure devops pipeline deploys the extracted dacpac from the source to the target dedicated pool.
+
 # Code snippet for deployment to the target environment 
 
 The SQL Package action for deployment is quite similar to the pervious task , except the DeploymentAction. By default this is deploy , so the dacpac provided is deployed to the target environment specified.
