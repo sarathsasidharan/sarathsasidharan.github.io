@@ -40,7 +40,7 @@ Sensitive identity and connection details locked inside an azure [key vault](htt
 
 The secrets have to be  stored inside an azure keyvault as shown below.
 
-![figure2](/images/keyvault.PNG)
+![figure2](/images/kv.png)
 
 # Code snippet for extraction of the source environment 
 
