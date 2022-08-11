@@ -44,9 +44,12 @@ The secrets have to be  stored inside an azure keyvault as shown below.
 
 # Code snippet for extraction of the source environment 
 
+
 https://github.com/sarathsasidharan/sarathsasidharan.github.io/blob/5eb8387e685fc3365ae26ac7f2d5d956755e3770/code/sqlpackage/deploysql.yml#L11-L23
 
 Once the pipeline within Azure DevOps is triggered. The secrets (keys / connection details etc.) of the source synapse dedicated pool are retrieved. This is stored within [variable groups](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=yaml) of Azure DevOps. Variable Groups are used to store values and secrets which need to be passed into the pipelines. Variable groups can be linked to azure key vault.
+
+Variables defined inside the variable group inside the pipeline can be refered using the $(<variable_name>) sytnax as seen in the code snippet above.
 
 After the details have been extracted the pipeline , next goes towards the first activity in the pipeline which is a task. A task is an atomic block in a pipeline which is a pre-packaged script that performs the activity which needs to be executed. In our scenario, this is to extract the environment as an artifact. We use the pre-built task named  [SQL Package activity](https://docs.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage-pipelines?view=sql-server-ver16) to achieve this.
 
