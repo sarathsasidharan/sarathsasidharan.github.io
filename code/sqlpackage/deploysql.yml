@@ -18,7 +18,7 @@ steps:
     SqlPassword: '$(srcSqlPwd)'
     deployType: 'DacpacTask'
     DeploymentAction: Extract
-    DacpacFile: 'mands.dacpac'
+    DacpacFile: '$(sourceDatabaseName).dacpac'
     # AdditionalArguments: '/Variables:ADLSLocation=abfss://datalake@$(datalakeAccountName).dfs.core.windows.net /Variables:ADLSCredentialKey=$(datalakeKey)'
   displayName: 'Extract DACPAC From Source synapse dedicated sql pool'
   
@@ -32,6 +32,6 @@ steps:
     SqlUsername: '$(sinkSqlUser)'
     SqlPassword: '$(sinkSqlPwd)'
     deployType: 'DacpacTask'
-    DacpacFile: 'GeneratedOutputFiles/adw.dacpac'
+    DacpacFile: 'GeneratedOutputFiles/$(sourceDatabaseName).dacpac'
     # AdditionalArguments: '/Variables:ADLSLocation=abfss://datalake@$(datalakeAccountName).dfs.core.windows.net /Variables:ADLSCredentialKey=$(datalakeKey)'
   displayName: 'Deploy DACPAC to synapse dedicated sql pool'
