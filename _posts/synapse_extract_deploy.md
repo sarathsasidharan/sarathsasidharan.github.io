@@ -63,7 +63,7 @@ The SQL Package action for deployment is quite similar to the pervious task , ex
 
 https://github.com/sarathsasidharan/sarathsasidharan.github.io/blob/1da903ef9047cec418796f555a7ee861d45bfef4/code/sqlpackage/deploysql.yml#L26-L37
 
-After the extraction of the dacpac is complete , the next task in the pipeline is triggered. This has to pick up the extracted artifact from the source dedicated pool and deploy it in a sink dedicated pool. This is also achieved using a SQL Package activity. Second Service connection is used to connect to the second subscription.The credentials for the sink dedicated pool are picked up from the key vault , via the variable groups (as discussed in the previous step). 
+The extracted artifact from the source dedicated pool (previous step) is picked and  deployed in the target dedicated pool. Second Service connection is used to connect to the second subscription aka the target subscription.The credentials for the sink dedicated pool are picked up from the key vault , via the variable groups (as discussed in the previous step). 
 
 A connection is established to the sink dedicated  pool and the extracted dacpac is deployed. After a succesful deployment all objects in the source pool will be visible in the sink pool.
 
