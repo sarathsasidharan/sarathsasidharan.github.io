@@ -34,6 +34,8 @@ The pipleine to create the package and deploy it is built within azure devops.
 
 The trigger for this workflow starts with an Azure DevOps Pipeline. In this scenario two [service connections](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml) need to be created which have rights to extract the warehouse artifacts from Synapse Dedicated pool in the source subscription and deploy the artifact in a sink subscription. A service connection is a connection object which is used by Azure DevOps to connect to azure.Under the hood , the service connections are refering to [service principals](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) which have access to the underlying subscription for reading and writing to the target dedicated pool. 
 
+## Extract Dacpac From Source Dedicated Pool
+
 ![figure1](/images/extract.png)
 
 Sensitive identity and connection details locked inside an azure [key vault](https://docs.microsoft.com/en-us/azure/key-vault/general/basic-concepts) which is an HSM Solution on azure.
@@ -56,6 +58,8 @@ Variables defined inside the variable group inside the pipeline can be refered u
 After the details have been extracted the pipeline , next goes towards the first activity in the pipeline which is a task. A task is an atomic block in a pipeline which is a pre-packaged script that performs the activity which needs to be executed. In our scenario, this is to extract the environment as an artifact. We use the pre-built task named  [SQL Package activity](https://docs.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage-pipelines?view=sql-server-ver16) to achieve this.
 
 This task connects to the Syanpse Dedicated Pools and starts extracting the dacpac , which contains all the information needed to recreate this environment on a different pool. All these tasks are run on VMs which are called [Azure Pipeline Agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops&tabs=browser) /build agents. The resulting dacpac extracted from the source dedicated pool is written into the local storage of the build agent. If you are using separate pipelines to extract and deploy the artifact then you need to store this artifact in an [azure artifact](https://docs.microsoft.com/en-us/azure/devops/artifacts/start-using-azure-artifacts?view=azure-devops). This artifact can then later be retrieved in the second pipeline , to deploy the artifact. In this scenario we have just one single pipeline to extract and deploy , hence we will refer to the local drive of the build agent.
+
+## Deploy Dacpac to target Dedicated Pool
 
 ![figure1](/images/deploy.png)
 
