@@ -5,10 +5,10 @@
 theme: jekyll-theme-cayman
 
 # Name of your site (displayed in the header)
-name: Azure Data Garage
+name: Data Blogs
 
 # Short bio or description (displayed in the header)
-description: Azure Data Blogs
+description: List of blogs to help you generate value out of data
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars.githubusercontent.com/u/9977936?v=4
